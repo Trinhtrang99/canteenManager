@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -78,9 +79,21 @@ public class RegisActivity extends AppCompatActivity {
 
         binding.btnContinue.setOnClickListener(view -> {
             String phone = binding.edtSdt.getText().toString();
-            if (!TextUtils.isEmpty(phone)) {
-                startPhoneNumberVerification(phone);
-            }
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
+            database.collection(Constants.KEY_COLLECTION_ACCOUNT)
+                    .whereEqualTo(Constants.KEY_PHONE_NUMBER, phone)
+                    .get()
+                    .addOnCompleteListener( task -> {
+                        if (task.isSuccessful() && task.getResult() != null
+                                && task.getResult().getDocuments().size() > 0) {
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                            Toast.makeText(getApplicationContext(), "So dt ton tai", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (!TextUtils.isEmpty(phone)) {
+                                startPhoneNumberVerification(phone);
+                            }
+                        }
+                    });
         });
 
         binding.btnSubmit.setOnClickListener(view -> {

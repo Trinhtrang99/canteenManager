@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "463816532951",
+    "project_id": "canteenapp-3e304",
+    "storage_bucket": "canteenapp-3e304.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463816532951:android:49f4b57be706ad2303e192",
+        "android_client_info": {
+          "package_name": "com.example.restaurantmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463816532951-4mt898lbe9as96kg9th64pduukld222o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiTRleC70DJLFi78Y7mA0PKwN2Y5Ekty0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463816532951-4mt898lbe9as96kg9th64pduukld222o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

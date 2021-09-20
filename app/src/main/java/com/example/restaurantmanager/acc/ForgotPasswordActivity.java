@@ -10,11 +10,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
-import com.example.restaurantmanager.databinding.ActivityRegisBinding;
+import com.example.restaurantmanager.databinding.ActivityForgotPasswordBinding;
 import com.example.restaurantmanager.ultils.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,15 +23,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class RegisActivity extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
-
-    private ActivityRegisBinding binding;
+    private ActivityForgotPasswordBinding binding;
     private PhoneAuthProvider.ForceResendingToken forceResendingToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
     private String verificationId;
@@ -42,7 +41,7 @@ public class RegisActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_regis);
+        binding = DataBindingUtil.setContentView(this ,R.layout.activity_forgot_password);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -109,7 +108,7 @@ public class RegisActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         progressDialog.dismiss();
                         String phone = firebaseAuth.getCurrentUser().getPhoneNumber();
-                        registerAccount();
+                        updateAccount();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -120,15 +119,27 @@ public class RegisActivity extends AppCompatActivity {
                 });
     }
 
-    private void registerAccount () {
+    private void updateAccount() {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String, Object> user = new HashMap<>();
         user.put(Constants.KEY_PHONE_NUMBER, binding.edtSdt.getText().toString());
         user.put(Constants.KEY_PASSWORD, binding.edtMk.getText().toString());
         database.collection(Constants.KEY_COLLECTION_ACCOUNT)
-                .add(user)
-                .addOnSuccessListener(documentReference -> {
-                    onBackPressed();
+                .whereEqualTo(Constants.KEY_PHONE_NUMBER, binding.edtSdt.getText().toString())
+                .get()
+                .addOnCompleteListener( task -> {
+                    if (task.isSuccessful() && task.getResult() != null
+                            && task.getResult().getDocuments().size() > 0) {
+                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+
+                        database.collection(Constants.KEY_COLLECTION_ACCOUNT)
+                                .document(documentSnapshot.getId())
+                                .update(user)
+                                .addOnSuccessListener(documentReference -> {
+                                    onBackPressed();
+                                });
+
+                    }
                 });
     }
 

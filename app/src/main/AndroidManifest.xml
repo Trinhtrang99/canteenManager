@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantManager">
-        <activity android:name=".acc.RegisActivity"></activity>
-        <activity android:name=".acc.LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".acc.ForgotPasswordActivity"
+            android:exported="true" />
+        <activity android:name=".acc.RegisActivity" />
+        <activity android:name=".acc.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

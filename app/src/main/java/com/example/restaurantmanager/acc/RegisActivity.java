@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityRegisBinding;
 import com.example.restaurantmanager.ultils.Constants;
@@ -27,7 +27,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegisActivity extends AppCompatActivity {
@@ -39,6 +41,8 @@ public class RegisActivity extends AppCompatActivity {
     private String verificationId;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private List<String> typeUsers;
+    private String typeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,10 @@ public class RegisActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_regis);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        typeUsers = new ArrayList<>();
+        typeUsers.add("Sinh Viên");
+        typeUsers.add("Quan chức");
+        setSpinner();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait...");
@@ -104,6 +112,24 @@ public class RegisActivity extends AppCompatActivity {
         });
     }
 
+    private void setSpinner () {
+        ArrayAdapter spinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, typeUsers);
+
+        binding.spinner.setAdapter(spinnerAdapter);
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //String msg = "position :" + position + " value :" + typeUsers.get(position);
+                typeUser = typeUsers.get(position);
+                //Toast.makeText(RegisActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Toast.makeText(RegisActivity.this, "onNothingSelected", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void verifyPhoneNumberWriteCode(String verificationId, String code) {
         progressDialog.setMessage("Verifying Phone Number");
         progressDialog.show();
@@ -138,6 +164,7 @@ public class RegisActivity extends AppCompatActivity {
         HashMap<String, Object> user = new HashMap<>();
         user.put(Constants.KEY_PHONE_NUMBER, binding.edtSdt.getText().toString());
         user.put(Constants.KEY_PASSWORD, binding.edtMk.getText().toString());
+        user.put(Constants.KEY_TYPE_USER, typeUser);
         database.collection(Constants.KEY_COLLECTION_ACCOUNT)
                 .add(user)
                 .addOnSuccessListener(documentReference -> {

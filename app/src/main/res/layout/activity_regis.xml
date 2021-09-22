@@ -76,6 +76,13 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/tvMk" />
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/edtMk">
+            </Spinner>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_continue"
                 android:layout_width="match_parent"

@@ -40,10 +40,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.btnlogin.setOnClickListener(view -> {
-            //signIn();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            signIn();
+            /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
-            finish();
+            finish();*/
         });
 
         binding.chkRememberMe.setOnCheckedChangeListener((buttonView, isChecked) -> {

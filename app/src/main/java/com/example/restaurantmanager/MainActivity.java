@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.restaurantmanager.acc.LoginActivity;
+import com.example.restaurantmanager.account.AcountFragment;
 import com.example.restaurantmanager.adapter.AdapterViewPager;
 import com.example.restaurantmanager.databinding.ActivityMainBinding;
 import com.example.restaurantmanager.ultils.PreferenceManager;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 preferenceManager.clear();
                 startActivity(new Intent(getApplicationContext() ,LoginActivity.class));
                 finish();
+                break;
+            case R.id.acc:
+                AcountFragment acountFragment = new AcountFragment();
                 break;
         }
         return false;

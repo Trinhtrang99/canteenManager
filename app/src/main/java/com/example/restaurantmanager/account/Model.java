@@ -15,6 +15,7 @@ public class Model {
         this.type = type;
     }
 
+
     public Model(String name, Integer type) {
         this.title = name;
         this.type = type;

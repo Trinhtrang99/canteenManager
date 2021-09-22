@@ -4,6 +4,7 @@ public class Constants {
 
     public final static String KEY_PHONE_NUMBER = "phoneNumber";
     public final static String KEY_PASSWORD = "password";
+    public final static String KEY_TYPE_USER = "typeUser";
     public final static String KEY_COLLECTION_ACCOUNT = "accounts";
 
     public final static String KEY_PREFERENCE_NAME = "preference";

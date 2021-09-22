@@ -19,10 +19,10 @@ public class AcountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding.txtls.setOnClickListener(v -> {
-            Intent i = new Intent(getContext(), HistoryActivity.class);
-            startActivity(i);
-        });
+//        binding.txtls.setOnClickListener(v -> {
+//            Intent i = new Intent(getContext(), HistoryActivity.class);
+//            startActivity(i);
+//        });
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,14 @@ import java.util.ArrayList;
 public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
     ArrayList<Food> list;
     Context context;
+    Boolean isAdmin;
+    OnLongPress onLongPress;
 
-    public AdapterFood(ArrayList<Food> list, Context context) {
+    public AdapterFood(ArrayList<Food> list, Context context, Boolean isAdmin, OnLongPress onLongPress) {
         this.list = list;
         this.context = context;
+        this.isAdmin = isAdmin;
+        this.onLongPress = onLongPress;
     }
 
     @NonNull
@@ -39,6 +44,20 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
         holder.tv_name.setText(list.get(position).getName());
         // Glide.with(context).load(list.get(position).getImg()).into(holder.img_food);
         holder.tv_price.setText(list.get(position).getPrice() + "");
+        if (isAdmin) {
+            holder.checkBox.setVisibility(View.GONE);
+            holder.rl.setOnLongClickListener(v -> {
+                onLongPress.onLongPress();
+                holder.checkBox.setVisibility(View.VISIBLE);
+                holder.checkBox.setChecked(true);
+                return true;
+            });
+            holder.rl.setOnClickListener(v -> {
+                onLongPress.onPressEdit();
+            });
+        } else {
+            holder.checkBox.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -50,6 +69,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
         TextView tv_name, tv_price;
         ImageView img_food;
         CheckBox checkBox;
+        RelativeLayout rl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +77,11 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
             img_food = itemView.findViewById(R.id.img_food);
             checkBox = itemView.findViewById(R.id.checked);
             tv_price = itemView.findViewById(R.id.tv_price);
+            rl = itemView.findViewById(R.id.rl);
         }
+    }
+    interface OnLongPress{
+        void onLongPress();
+        void onPressEdit();
     }
 }

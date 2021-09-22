@@ -26,12 +26,11 @@ public class ChartActivity extends AppCompatActivity {
             test.add(String.valueOf(i + 1));
         }
         LineView lineView = (LineView) findViewById(R.id.line_view);
-        lineView.setDrawDotLine(false); //optional
+        lineView.setDrawDotLine(false);
         lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY); //optional
         lineView.setBottomTextList(test);
         lineView.setColorArray(new int[]{Color.BLACK, Color.GREEN, Color.GRAY, Color.CYAN});
         randomSet(lineView);
-        //randomSet(lineView, lineViewFloat)
     }
 
 

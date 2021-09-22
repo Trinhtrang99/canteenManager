@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.restaurantmanager">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantManager">
-        <activity android:name=".account.HistoryActivity"></activity>
-         <activity android:name=".account.ChartActivity"></activity>
+        <activity android:name=".admin.ListDetailActivity"></activity>
+        <activity android:name=".admin.EditActivity" /> <!-- <activity android:name=".admin.AdminActivity"></activity> -->
+        <activity android:name=".account.HistoryActivity" />
+        <activity android:name=".account.ChartActivity" />
         <activity
             android:name=".acc.ForgotPasswordActivity"
             android:exported="true" />
         <activity android:name=".acc.RegisActivity" />
-        <activity android:name=".acc.LoginActivity">
+        <activity android:name=".admin.AdminActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

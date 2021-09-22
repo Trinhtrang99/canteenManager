@@ -2,45 +2,59 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal">
+
         <RelativeLayout
-            android:descendantFocusability="blocksDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".aresetup.AreaSetup1Activity"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:descendantFocusability="blocksDescendants"
+            tools:context=".aresetup.AreaSetup1Activity">
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/ll_back_setup_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/img_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
                     android:layout_gravity="center"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:visibility="gone" />
 
+                <ImageView
+                    android:id="@+id/imgdelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_delete_24"
+                    android:visibility="gone" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@id/ll_back_setup_area"
                 android:id="@+id/rc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_below="@id/ll_back_setup_area"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         </RelativeLayout>
@@ -48,29 +62,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/btncustom"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:layout_margin="20dp"
+                android:background="@drawable/btncustom"
                 android:text="updata thông tin "
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:visibility="gone" />
 
 
         </LinearLayout>
 
 
     </RelativeLayout>
-
 
 
 </layout>

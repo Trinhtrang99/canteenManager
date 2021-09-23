@@ -15,17 +15,20 @@ import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.acc.LoginActivity;
 import com.example.restaurantmanager.account.AcountFragment;
 import com.example.restaurantmanager.databinding.ActivityAdminBinding;
+import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityAdminBinding binding;
     private ActionBarDrawerToggle toggle;
+    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin);
         setSupportActionBar(binding.toolbar);
+        preferenceManager = new PreferenceManager(getApplicationContext());
 
         binding.navigationview.setNavigationItemSelectedListener(this);
         toggle = new ActionBarDrawerToggle(this, binding.drawer, R.string.open, R.string.close);
@@ -49,6 +52,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                preferenceManager.clear();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
                 break;

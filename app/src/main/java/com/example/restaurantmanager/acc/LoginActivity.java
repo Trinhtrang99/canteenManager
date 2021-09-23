@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
+import com.example.restaurantmanager.admin.AdminActivity;
 import com.example.restaurantmanager.databinding.ActivityLoginBinding;
 import com.example.restaurantmanager.ultils.Constants;
 import com.example.restaurantmanager.ultils.PreferenceManager;
@@ -30,9 +31,15 @@ public class LoginActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
 
         if (preferenceManager.getBoolean(Constants.KEY_IS_REMEMBER_PASSWORD)) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
+            if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
         binding.tvregis.setOnClickListener(view -> {
@@ -69,8 +76,14 @@ public class LoginActivity extends AppCompatActivity {
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         preferenceManager.putString(Constants.KEY_PHONE_NUMBER, documentSnapshot.getString(Constants.KEY_PHONE_NUMBER));
                         preferenceManager.putString(Constants.KEY_PASSWORD, documentSnapshot.getString(Constants.KEY_PASSWORD));
+                        preferenceManager.putString(Constants.KEY_TYPE_USER, documentSnapshot.getString(Constants.KEY_TYPE_USER));
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent;
+                        if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+                            intent = new Intent(getApplicationContext(), AdminActivity.class);
+                        } else {
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                        }
                         startActivity(intent);
                         finish();
                     }

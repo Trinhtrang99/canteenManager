@@ -1,6 +1,9 @@
 package com.example.restaurantmanager.fragmentmain;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.datafake.Food;
+import com.example.restaurantmanager.ultils.BitmapUltil;
 
 import java.util.ArrayList;
 
@@ -44,16 +48,20 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
         holder.tv_name.setText(list.get(position).getName());
         // Glide.with(context).load(list.get(position).getImg()).into(holder.img_food);
         holder.tv_price.setText(list.get(position).getPrice() + "");
+        Bitmap bitmap = BitmapUltil.getBitmap(list.get(position).getImg());
+        if (bitmap != null) {
+            holder.img_food.setImageBitmap(bitmap);
+        }
         if (isAdmin) {
             holder.checkBox.setVisibility(View.GONE);
             holder.rl.setOnLongClickListener(v -> {
-                onLongPress.onLongPress();
+                onLongPress.onLongPress(list.get(position).getId());
                 holder.checkBox.setVisibility(View.VISIBLE);
                 holder.checkBox.setChecked(true);
                 return true;
             });
             holder.rl.setOnClickListener(v -> {
-                onLongPress.onPressEdit();
+                onLongPress.onPressEdit(list.get(position));
             });
         } else {
             holder.checkBox.setVisibility(View.VISIBLE);
@@ -80,8 +88,9 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
             rl = itemView.findViewById(R.id.rl);
         }
     }
+
     interface OnLongPress{
-        void onLongPress();
-        void onPressEdit();
+        void onLongPress(String idFood);
+        void onPressEdit(Food food);
     }
 }

@@ -1,9 +1,12 @@
 package com.example.restaurantmanager.datafake;
 
-public class Food {
-    String name;
-    int price;
-    String img;
+import java.io.Serializable;
+
+public class Food implements Serializable {
+    private String id;
+    private String name;
+    private int price;
+    private String img;
 
     public String getName() {
         return name;
@@ -27,6 +30,14 @@ public class Food {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Food(String name, int price, String img) {

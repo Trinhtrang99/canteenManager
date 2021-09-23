@@ -16,6 +16,16 @@
             tools:context=".aresetup.AreaSetup1Activity"
             android:background="@color/white">
 
+            <ImageView
+                android:id="@+id/imgdelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:visibility="gone" />
+
 
             <LinearLayout
                 android:id="@+id/ll_back_setup_area"
@@ -36,11 +46,11 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@id/ll_back_setup_area"
                 android:id="@+id/rc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_below="@id/ll_back_setup_area"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         </RelativeLayout>

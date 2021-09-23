@@ -68,6 +68,7 @@ public class RecyclerViewAdapter extends ListAdapter<Model, RecyclerView.ViewHol
 
         public void bind(Model model) {
             date.setText(model.date);
+            title.setText(model.title);
         }
     }
 

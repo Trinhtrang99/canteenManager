@@ -87,6 +87,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/edt_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -112,6 +113,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/edt_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -136,6 +138,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/edt_quantity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -149,7 +152,7 @@
                     android:layout_below="@id/rl5"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/btncustom"
-                    android:text="Thêm (50.000đ)"
+                    android:text="Thêm (0VND)"
                     android:textAllCaps="false" />
 
                 <androidx.recyclerview.widget.RecyclerView

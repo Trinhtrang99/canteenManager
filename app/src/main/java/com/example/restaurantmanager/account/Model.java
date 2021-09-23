@@ -1,13 +1,15 @@
 package com.example.restaurantmanager.account;
 
+import java.util.ArrayList;
+
 public class Model {
     String title;
     String date;
-    String detail;
+    ArrayList<String> detail;
     String tongtien;
     Integer type;
 
-    public Model(String title, String date, String detail, String tongtien, Integer type) {
+    public Model(String title, String date, ArrayList<String> detail, String tongtien, Integer type) {
         this.title = title;
         this.date = date;
         this.detail = detail;

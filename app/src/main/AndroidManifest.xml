@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantManager">
-        <activity android:name=".admin.ListDetailActivity"></activity>
+        <activity android:name=".admin.ListDetailActivity" />
         <activity android:name=".admin.EditActivity" /> <!-- <activity android:name=".admin.AdminActivity"></activity> -->
         <activity android:name=".account.HistoryActivity" />
         <activity android:name=".account.ChartActivity" />
@@ -19,18 +19,14 @@
             android:name=".acc.ForgotPasswordActivity"
             android:exported="true" />
         <activity android:name=".acc.RegisActivity" />
-        <activity android:name=".admin.AdminActivity">
-
-        </activity>
+        <activity android:name=".admin.AdminActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".acc.LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <provider
@@ -42,7 +38,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>

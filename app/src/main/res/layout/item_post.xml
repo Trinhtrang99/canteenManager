@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_post"
+                android:id="@+id/txt_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -33,7 +33,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/buoi"
+                android:id="@+id/txt_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -41,6 +41,7 @@
                 android:text="10/1/2021" />
 
             <TextView
+                android:id="@+id/txt_food"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Canh(500.000), Cá (500.000), Cà (500.000)" />

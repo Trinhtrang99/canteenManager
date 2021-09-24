@@ -77,6 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                         preferenceManager.putString(Constants.KEY_PHONE_NUMBER, documentSnapshot.getString(Constants.KEY_PHONE_NUMBER));
                         preferenceManager.putString(Constants.KEY_PASSWORD, documentSnapshot.getString(Constants.KEY_PASSWORD));
                         preferenceManager.putString(Constants.KEY_TYPE_USER, documentSnapshot.getString(Constants.KEY_TYPE_USER));
+                        preferenceManager.putString(Constants.KEY_ID_USER, documentSnapshot.getId());
+
+                        if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+                            preferenceManager.putString(Constants.KEY_SURPLUS, documentSnapshot.getString(Constants.KEY_SURPLUS));
+
+                        }
 
                         Intent intent;
                         if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {

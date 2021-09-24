@@ -32,7 +32,6 @@ public class HistoryActivity extends BaseActivity implements OnOptionChangedList
     private LinearLayoutManager layoutManager;
     private KmHeaderItemDecoration kmHeaderItemDecoration;
     private ActivityHistoryBinding binding;
-    private ArrayList<String> foods;
     private List<History> histories;
     private List<String> years;
     private String year;

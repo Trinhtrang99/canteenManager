@@ -17,13 +17,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.BaseFragment;
+import com.example.restaurantmanager.PayActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.admin.AdminActivity;
 import com.example.restaurantmanager.admin.EditActivity;
 import com.example.restaurantmanager.databinding.FramentfoodBinding;
 import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.datafake.ListData;
+import com.example.restaurantmanager.model.ICallbackCheckBox;
+import com.example.restaurantmanager.model.Pay;
 import com.example.restaurantmanager.ultils.Constants;
+import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,12 +36,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPress {
+public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPress, ICallbackCheckBox {
     private FramentfoodBinding binding;
     private AdapterFood adapterFollower;
     private ArrayList<Food> foods;
     private ArrayList<String> idFoods;
     private Integer count;
+    private PreferenceManager preferenceManager;
+    private boolean isAdmin;
+    private ICallbackCheckBox callbackCheckBox;
+    private ArrayList<Pay> pays;
 
     @Nullable
     @Override
@@ -56,15 +64,23 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
             idFoods = new ArrayList<>();
             binding.imgBack.setVisibility(View.VISIBLE);
             binding.btn.setVisibility(View.VISIBLE);
+            isAdmin = true;
+            binding.btnTotalMoney.setVisibility(View.GONE);
 
         } else {
-
+            pays = new ArrayList<>();
+            callbackCheckBox = this::listenCheckbox;
+            preferenceManager = new PreferenceManager(getContext());
 //            adapterFollower = new AdapterFood(ListData.list(), getContext(),false);
 //            RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
 //            binding.rc.setLayoutManager(layoutManager1);
 //            binding.rc.setAdapter(adapterFollower);
             binding.imgBack.setVisibility(View.GONE);
             binding.btn.setVisibility(View.GONE);
+            binding.btnTotalMoney.setVisibility(View.VISIBLE);
+
+            foods = new ArrayList<>();
+            getFoods();
         }
         binding.imgBack.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager().popBackStackImmediate();
@@ -96,6 +112,12 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
             }
 
         });
+
+        binding.btnTotalMoney.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), PayActivity.class);
+            intent.putExtra("pays", pays);
+            startActivity(intent);
+        });
     }
 
     private void getFoods () {
@@ -115,7 +137,8 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
                         foods.add(food);
                     }
 
-                    adapterFollower = new AdapterFood(foods, getContext(), true, this);
+                    adapterFollower = new AdapterFood(foods, getContext(), isAdmin, this);
+                    adapterFollower.setCallbackCheckBox(this::listenCheckbox);
                     RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
                     binding.rc.setLayoutManager(layoutManager1);
                     binding.rc.setAdapter(adapterFollower);
@@ -126,24 +149,40 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
 
     @Override
     public void onLongPress(String idFood) {
-        idFoods.add(idFood);
-        binding.imgdelete.setVisibility(View.VISIBLE);
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            idFoods.add(idFood);
+            binding.imgdelete.setVisibility(View.VISIBLE);
+        } else {
+
+        }
     }
 
     @Override
     public void onPressEdit(Food food) {
-        Intent i = new Intent(getContext(), EditActivity.class);
-        i.putExtra("isEdit", true);
-        i.putExtra("food", food);
-        i.putExtra(Constants.TYPE_FOOD, Constants.KEY_COLLECTION_FOOD);
-        startActivity(i);
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            Intent i = new Intent(getContext(), EditActivity.class);
+            i.putExtra("isEdit", true);
+            i.putExtra("food", food);
+            i.putExtra(Constants.TYPE_FOOD, Constants.KEY_COLLECTION_FOOD);
+            startActivity(i);
+        } else {
+
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        binding.imgdelete.setVisibility(View.GONE);
-        foods = new ArrayList<>();
-        getFoods();
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            binding.imgdelete.setVisibility(View.GONE);
+            foods = new ArrayList<>();
+            getFoods();
+        }
+    }
+
+    @Override
+    public void listenCheckbox(String totalMoney, ArrayList<Pay> pays) {
+        binding.btnTotalMoney.setText(totalMoney + "VND");
+        this.pays = pays;
     }
 }

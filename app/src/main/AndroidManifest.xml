@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantManager">
+        <activity
+            android:name=".PayActivity"
+            android:exported="true" />
         <activity android:name=".admin.ListDetailActivity" />
         <activity android:name=".admin.EditActivity" /> <!-- <activity android:name=".admin.AdminActivity"></activity> -->
         <activity android:name=".account.HistoryActivity" />
@@ -19,7 +22,7 @@
             android:name=".acc.ForgotPasswordActivity"
             android:exported="true" />
         <activity android:name=".acc.RegisActivity" />
-        <activity android:name=".admin.AdminActivity"></activity>
+        <activity android:name=".admin.AdminActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".acc.LoginActivity">
             <intent-filter>

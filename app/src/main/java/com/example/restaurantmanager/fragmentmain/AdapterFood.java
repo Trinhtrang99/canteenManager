@@ -11,23 +11,36 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.datafake.Food;
+import com.example.restaurantmanager.model.ICallbackCheckBox;
+import com.example.restaurantmanager.model.Pay;
 import com.example.restaurantmanager.ultils.BitmapUltil;
+import com.example.restaurantmanager.ultils.Constants;
 
 import java.util.ArrayList;
 
 public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
-    ArrayList<Food> list;
-    Context context;
-    Boolean isAdmin;
-    OnLongPress onLongPress;
+    private ArrayList<Food> list;
+    private Context context;
+    private Boolean isAdmin;
+    private OnLongPress onLongPress;
+    private ICallbackCheckBox callbackCheckBox;
+    private Integer totalMoney;
+    private ArrayList<Pay> pays;
+
+    public void setCallbackCheckBox(ICallbackCheckBox callbackCheckBox) {
+        this.callbackCheckBox = callbackCheckBox;
+    }
 
     public AdapterFood(ArrayList<Food> list, Context context, Boolean isAdmin, OnLongPress onLongPress) {
+        totalMoney = 0;
+        pays = new ArrayList<>();
         this.list = list;
         this.context = context;
         this.isAdmin = isAdmin;
@@ -47,7 +60,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
     public void onBindViewHolder(@NonNull AdapterFood.ViewHolder holder, int position) {
         holder.tv_name.setText(list.get(position).getName());
         // Glide.with(context).load(list.get(position).getImg()).into(holder.img_food);
-        holder.tv_price.setText(list.get(position).getPrice() + "");
+        holder.tv_price.setText(list.get(position).getPrice() + " VND");
         Bitmap bitmap = BitmapUltil.getBitmap(list.get(position).getImg());
         if (bitmap != null) {
             holder.img_food.setImageBitmap(bitmap);
@@ -65,6 +78,23 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
             });
         } else {
             holder.checkBox.setVisibility(View.VISIBLE);
+            holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    pays.add(new Pay(list.get(position).getId(), list.get(position).getImg(), list.get(position).getName()));
+                    totalMoney += list.get(position).getPrice();
+                } else {
+                    for (Integer i = 0; i < pays.size(); i++) {
+                        if (list.get(position).getId().equals(pays.get(i).getId())) {
+                            pays.remove(i);
+                        }
+                    }
+                    totalMoney -= list.get(position).getPrice();
+                }
+
+                if (callbackCheckBox != null) {
+                    callbackCheckBox.listenCheckbox(String.valueOf(totalMoney), pays);
+                }
+            });
         }
     }
 

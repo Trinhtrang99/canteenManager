@@ -23,6 +23,8 @@ public class Constants {
     public final static String KEY_TIME = "time";
     public final static String KEY_COLLECTION_MONTH = "month";
     public final static String KEY_FOOD_BY_DAY = "foodByDay";
+    public final static String KEY_COLLECTION_ORDER = "orders";
+    public final static String KEY_COLLECTION_ORDER_DETAIL = "orderDetail";
 
     public final static String KEY_PREFERENCE_NAME = "preference";
     public final static String KEY_IS_REMEMBER_PASSWORD = "remember_password";

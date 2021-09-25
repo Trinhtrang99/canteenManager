@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.model.ICallbackCheckBox;
@@ -30,17 +31,8 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
     private Context context;
     private Boolean isAdmin;
     private OnLongPress onLongPress;
-    private ICallbackCheckBox callbackCheckBox;
-    private Integer totalMoney;
-    private ArrayList<Pay> pays;
-
-    public void setCallbackCheckBox(ICallbackCheckBox callbackCheckBox) {
-        this.callbackCheckBox = callbackCheckBox;
-    }
 
     public AdapterFood(ArrayList<Food> list, Context context, Boolean isAdmin, OnLongPress onLongPress) {
-        totalMoney = 0;
-        pays = new ArrayList<>();
         this.list = list;
         this.context = context;
         this.isAdmin = isAdmin;
@@ -80,19 +72,21 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    pays.add(new Pay(list.get(position).getId(), list.get(position).getImg(), list.get(position).getName()));
-                    totalMoney += list.get(position).getPrice();
+                    MainActivity.pays.add(new Pay(list.get(position).getId(), list.get(position).getImg(),
+                            list.get(position).getName(), String.valueOf(list.get(position).getPrice())));
+                    MainActivity.totalMoney += list.get(position).getPrice();
                 } else {
-                    for (Integer i = 0; i < pays.size(); i++) {
-                        if (list.get(position).getId().equals(pays.get(i).getId())) {
-                            pays.remove(i);
+                    for (int i = 0; i < MainActivity.pays.size(); i++) {
+                        if (list.get(position).getId().equals(MainActivity.pays.get(i).getId())) {
+                            MainActivity.pays.remove(i);
+                            break;
                         }
                     }
-                    totalMoney -= list.get(position).getPrice();
+                    MainActivity.totalMoney -= list.get(position).getPrice();
                 }
 
-                if (callbackCheckBox != null) {
-                    callbackCheckBox.listenCheckbox(String.valueOf(totalMoney), pays);
+                if (MainActivity.callbackCheckBox != null) {
+                    MainActivity.callbackCheckBox.listenCheckbox();
                 }
             });
         }

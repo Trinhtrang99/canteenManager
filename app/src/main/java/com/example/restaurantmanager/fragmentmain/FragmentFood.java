@@ -36,7 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPress, ICallbackCheckBox {
+public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPress {
     private FramentfoodBinding binding;
     private AdapterFood adapterFollower;
     private ArrayList<Food> foods;
@@ -44,7 +44,6 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
     private Integer count;
     private PreferenceManager preferenceManager;
     private boolean isAdmin;
-    private ICallbackCheckBox callbackCheckBox;
     private ArrayList<Pay> pays;
 
     @Nullable
@@ -65,11 +64,9 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
             binding.imgBack.setVisibility(View.VISIBLE);
             binding.btn.setVisibility(View.VISIBLE);
             isAdmin = true;
-            binding.btnTotalMoney.setVisibility(View.GONE);
 
         } else {
             pays = new ArrayList<>();
-            callbackCheckBox = this::listenCheckbox;
             preferenceManager = new PreferenceManager(getContext());
 //            adapterFollower = new AdapterFood(ListData.list(), getContext(),false);
 //            RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
@@ -77,7 +74,6 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
 //            binding.rc.setAdapter(adapterFollower);
             binding.imgBack.setVisibility(View.GONE);
             binding.btn.setVisibility(View.GONE);
-            binding.btnTotalMoney.setVisibility(View.VISIBLE);
 
             foods = new ArrayList<>();
             getFoods();
@@ -112,12 +108,6 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
             }
 
         });
-
-        binding.btnTotalMoney.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), PayActivity.class);
-            intent.putExtra("pays", pays);
-            startActivity(intent);
-        });
     }
 
     private void getFoods () {
@@ -138,7 +128,6 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
                     }
 
                     adapterFollower = new AdapterFood(foods, getContext(), isAdmin, this);
-                    adapterFollower.setCallbackCheckBox(this::listenCheckbox);
                     RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
                     binding.rc.setLayoutManager(layoutManager1);
                     binding.rc.setAdapter(adapterFollower);
@@ -178,11 +167,5 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
             foods = new ArrayList<>();
             getFoods();
         }
-    }
-
-    @Override
-    public void listenCheckbox(String totalMoney, ArrayList<Pay> pays) {
-        binding.btnTotalMoney.setText(totalMoney + "VND");
-        this.pays = pays;
     }
 }

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal">
+
         <RelativeLayout
             android:descendantFocusability="blocksDescendants"
             android:layout_width="match_parent"
@@ -73,11 +74,11 @@
                 android:text="updata thông tin "
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
-
 
     </RelativeLayout>
 

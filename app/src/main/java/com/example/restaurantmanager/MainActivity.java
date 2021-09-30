@@ -16,15 +16,22 @@ import com.example.restaurantmanager.acc.LoginActivity;
 import com.example.restaurantmanager.account.AcountFragment;
 import com.example.restaurantmanager.adapter.AdapterViewPager;
 import com.example.restaurantmanager.databinding.ActivityMainBinding;
+import com.example.restaurantmanager.model.ICallbackCheckBox;
+import com.example.restaurantmanager.model.Pay;
 import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ICallbackCheckBox {
     private ActivityMainBinding binding;
     private ActionBarDrawerToggle toggle;
     private FirebaseAuth firebaseAuth;
     private PreferenceManager preferenceManager;
+    public static ArrayList<Pay> pays = new ArrayList<>();
+    public static ICallbackCheckBox callbackCheckBox;
+    public static Integer totalMoney = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(binding.toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
         preferenceManager = new PreferenceManager(getApplicationContext());
+        pays = new ArrayList<>();
+        callbackCheckBox = this;
 
         binding.navigationview.setNavigationItemSelectedListener(this);
         toggle = new ActionBarDrawerToggle(this, binding.drawer, R.string.open, R.string.close);
@@ -46,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.viewpager.setAdapter(scheduleViewPagerAdapter);
         binding.viewpager.setOffscreenPageLimit(2);
         binding.tablayout.setupWithViewPager(binding.viewpager);
+
+        binding.btnTotalMoney.setOnClickListener(view1 -> {
+            Intent intent = new Intent(this, PayActivity.class);
+            intent.putExtra("pays", pays);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -82,5 +97,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
 
         }
+
+    @Override
+    public void listenCheckbox() {
+        binding.btnTotalMoney.setText(totalMoney + "VND");
+
     }
 }

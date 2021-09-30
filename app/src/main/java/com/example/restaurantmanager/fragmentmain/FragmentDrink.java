@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.BaseFragment;
+import com.example.restaurantmanager.PayActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.admin.EditActivity;
 import com.example.restaurantmanager.databinding.FragmentdrinkBinding;
 import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.datafake.ListData;
+import com.example.restaurantmanager.model.ICallbackCheckBox;
+import com.example.restaurantmanager.model.Pay;
 import com.example.restaurantmanager.ultils.Constants;
+import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -31,6 +35,9 @@ public class FragmentDrink extends BaseFragment implements AdapterFood.OnLongPre
     private ArrayList<Food> drinks;
     private ArrayList<String> idFoods;
     private Integer count;
+    private PreferenceManager preferenceManager;
+    private boolean isAdmin;
+    private ArrayList<Pay> pays;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +50,20 @@ public class FragmentDrink extends BaseFragment implements AdapterFood.OnLongPre
         super.onViewCreated(view, savedInstanceState);
 
         idFoods = new ArrayList<>();
+        pays = new ArrayList<>();
+        preferenceManager = new PreferenceManager(getContext());
 
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            isAdmin = true;
+            binding.btn.setVisibility(View.VISIBLE);
+            binding.imgBack.setVisibility(View.VISIBLE);
+        } else {
+            binding.imgdelete.setVisibility(View.GONE);
+            binding.btn.setVisibility(View.GONE);
+            binding.imgBack.setVisibility(View.GONE);
+            drinks = new ArrayList<>();
+            getDrink();
+        }
         binding.btn.setOnClickListener(view1 -> {
             Intent i = new Intent(getContext(), EditActivity.class);
             i.putExtra("isEdit", false);
@@ -89,7 +109,7 @@ public class FragmentDrink extends BaseFragment implements AdapterFood.OnLongPre
                         drinks.add(food);
                     }
 
-                    AdapterFood adapterFollower = new AdapterFood(drinks, getContext(), true, this);
+                    AdapterFood adapterFollower = new AdapterFood(drinks, getContext(), isAdmin, this);
                     RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
                     binding.rc.setLayoutManager(layoutManager1);
                     binding.rc.setAdapter(adapterFollower);
@@ -100,24 +120,34 @@ public class FragmentDrink extends BaseFragment implements AdapterFood.OnLongPre
 
     @Override
     public void onLongPress(String idFood) {
-        idFoods.add(idFood);
-        binding.imgdelete.setVisibility(View.VISIBLE);
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            idFoods.add(idFood);
+            binding.imgdelete.setVisibility(View.VISIBLE);
+        } else {
+
+        }
     }
 
     @Override
     public void onPressEdit(Food food) {
-        Intent i = new Intent(getContext(), EditActivity.class);
-        i.putExtra("isEdit", true);
-        i.putExtra("food", food);
-        i.putExtra(Constants.TYPE_FOOD, Constants.KEY_COLLECTION_DRINK);
-        startActivity(i);
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            Intent i = new Intent(getContext(), EditActivity.class);
+            i.putExtra("isEdit", true);
+            i.putExtra("food", food);
+            i.putExtra(Constants.TYPE_FOOD, Constants.KEY_COLLECTION_DRINK);
+            startActivity(i);
+        } else {
+
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        binding.imgdelete.setVisibility(View.GONE);
-        drinks = new ArrayList<>();
-        getDrink();
+        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+            binding.imgdelete.setVisibility(View.GONE);
+            drinks = new ArrayList<>();
+            getDrink();
+        }
     }
 }

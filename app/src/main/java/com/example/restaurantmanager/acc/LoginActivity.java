@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.example.restaurantmanager.BaseActivity;
 import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.admin.AdminActivity;
@@ -18,7 +19,7 @@ import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private ActivityLoginBinding binding;
     private PreferenceManager preferenceManager;
@@ -63,20 +64,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn () {
-        binding.progress.setVisibility(View.VISIBLE);
+        showProgressDialog(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_ACCOUNT)
                 .whereEqualTo(Constants.KEY_PHONE_NUMBER, binding.edtSdt.getText().toString())
                 .whereEqualTo(Constants.KEY_PASSWORD, binding.edtMk.getText().toString())
                 .get()
                 .addOnCompleteListener( task -> {
-                    binding.progress.setVisibility(View.GONE);
+                    showProgressDialog(false);
                     if (task.isSuccessful() && task.getResult() != null
                             && task.getResult().getDocuments().size() > 0) {
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                         preferenceManager.putString(Constants.KEY_PHONE_NUMBER, documentSnapshot.getString(Constants.KEY_PHONE_NUMBER));
                         preferenceManager.putString(Constants.KEY_PASSWORD, documentSnapshot.getString(Constants.KEY_PASSWORD));
                         preferenceManager.putString(Constants.KEY_TYPE_USER, documentSnapshot.getString(Constants.KEY_TYPE_USER));
+                        preferenceManager.putString(Constants.KEY_ID_USER, documentSnapshot.getId());
+
+                        if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+                            preferenceManager.putString(Constants.KEY_SURPLUS, documentSnapshot.getString(Constants.KEY_SURPLUS));
+
+                        }
 
                         Intent intent;
                         if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {

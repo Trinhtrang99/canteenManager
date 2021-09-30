@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restaurantmanager.R;
 import com.kodmap.library.kmrecyclerviewstickyheader.KmStickyListener;
 
-public class RecyclerViewAdapter extends ListAdapter<Model, RecyclerView.ViewHolder> implements KmStickyListener {
+public class RecyclerViewAdapter extends ListAdapter<History, RecyclerView.ViewHolder> implements KmStickyListener {
 
     public RecyclerViewAdapter() {
         super(ModelDiffUtilCallback);
@@ -48,33 +48,36 @@ public class RecyclerViewAdapter extends ListAdapter<Model, RecyclerView.ViewHol
 
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title_header);
+            title = itemView.findViewById(R.id.title_header);
         }
 
-        public void bind(Model model) {
-            title.setText(model.title);
+        public void bind(History model) {
+            title.setText("Tháng" + model.getMonth());
         }
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public TextView date;
+        public TextView txtTime, txtDate, txtFood, txtTotalMoney;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title_post);
-            date = (TextView) itemView.findViewById(R.id.buoi);
+            txtTime = itemView.findViewById(R.id.txt_time);
+            txtDate = itemView.findViewById(R.id.txt_date);
+            txtFood = itemView.findViewById(R.id.txt_food);
+            txtTotalMoney = itemView.findViewById(R.id.txt_total_money);
         }
 
-        public void bind(Model model) {
-            date.setText(model.date);
-            title.setText(model.title);
+        public void bind(History history) {
+            txtTime.setText(history.getTime());
+            txtDate.setText("Ngày " + history.getDay());
+            txtFood.setText(history.getName());
+            txtTotalMoney.setText(history.getTotalMoney() + "VND");
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return getItem(position).type;
+        return getItem(position).getType();
     }
 
     @Override
@@ -97,24 +100,24 @@ public class RecyclerViewAdapter extends ListAdapter<Model, RecyclerView.ViewHol
     @Override
     public void bindHeaderData(View header, Integer headerPosition) {
         TextView tv = header.findViewById(R.id.title_header);
-        tv.setText(getItem(headerPosition).title);
+        tv.setText("Tháng" + getItem(headerPosition).getMonth());
     }
 
     @Override
     public Boolean isHeader(Integer itemPosition) {
-        return getItem(itemPosition).type.equals(ItemType.Header);
+        return getItem(itemPosition).getType().equals(ItemType.Header);
     }
 
-    public static final DiffUtil.ItemCallback<Model> ModelDiffUtilCallback =
-            new DiffUtil.ItemCallback<Model>() {
+    public static final DiffUtil.ItemCallback<History> ModelDiffUtilCallback =
+            new DiffUtil.ItemCallback<History>() {
                 @Override
-                public boolean areItemsTheSame(@NonNull Model model, @NonNull Model t1) {
-                    return model.title.equals(t1.title);
+                public boolean areItemsTheSame(@NonNull History model, @NonNull History t1) {
+                    return model.getMonth().equals(t1.getMonth());
                 }
 
                 @SuppressLint("DiffUtilEquals")
                 @Override
-                public boolean areContentsTheSame(@NonNull Model model, @NonNull Model t1) {
+                public boolean areContentsTheSame(@NonNull History model, @NonNull History t1) {
                     return model.equals(t1);
                 }
             };

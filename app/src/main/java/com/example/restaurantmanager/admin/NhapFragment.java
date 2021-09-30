@@ -1,5 +1,6 @@
 package com.example.restaurantmanager.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.restaurantmanager.BaseFragment;
+import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.FragmentNhapBinding;
 import com.example.restaurantmanager.ultils.Constants;
+import com.example.restaurantmanager.ultils.PreferenceManager;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -34,6 +39,7 @@ public class NhapFragment extends BaseFragment {
     private String unit;
     private String type;
     private Integer totalMoney;
+    private PreferenceManager preferenceManager;
 
     private String arr1[] = {
             "Thực phẩm",
@@ -60,6 +66,8 @@ public class NhapFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        preferenceManager = new PreferenceManager(getContext());
 
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, arr1);
@@ -125,9 +133,8 @@ public class NhapFragment extends BaseFragment {
         });
     }
 
-
     private void addFoodManager () {
-        /*showProgressDialog(true);
+        showProgressDialog(true);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> foods = new HashMap<>();
         foods.put(Constants.KEY_NAME, binding.edtName.getText().toString());
@@ -136,12 +143,29 @@ public class NhapFragment extends BaseFragment {
         foods.put(Constants.KEY_UNIT, String.valueOf(unit));
         foods.put(Constants.TYPE_FOOD, type);
         foods.put(Constants.KEY_TOTAL_MONEY, String.valueOf(totalMoney));
-        foods.put(Constants.KEY_DATE, new SimpleDateFormat("dd_HH:mm:ss").format(new Date()));
-        db.collection(Constants.KEY_COLLECTION_FOOD_MANAGER).document("1").collection()
+        foods.put(Constants.KEY_DAY, new SimpleDateFormat("dd").format(new Date()));
+        foods.put(Constants.KEY_TIME, new SimpleDateFormat("HH").format(new Date()));
+
+        String year = new SimpleDateFormat("yyyy").format(new Date());
+        String month = new SimpleDateFormat("M").format(new Date());
+        db.collection(Constants.KEY_COLLECTION_FOOD_MANAGER)
+                .document(year)
+                .collection(Constants.KEY_COLLECTION_MONTH)
+                .document(month)
+                .collection(Constants.KEY_FOOD_BY_DAY)
                 .add(foods)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     showProgressDialog(false);
-                });*/
+                });
+
+
+        HashMap<String, Object> userAdmin = new HashMap<>();
+        Integer surplus = Integer.parseInt(preferenceManager.getString(Constants.KEY_SURPLUS));
+        surplus = surplus - totalMoney;
+        userAdmin.put(Constants.KEY_SURPLUS, String.valueOf(surplus));
+        db.collection(Constants.KEY_COLLECTION_ACCOUNT)
+                .document(preferenceManager.getString(Constants.KEY_ID_USER))
+                .update(userAdmin);
     }
 }

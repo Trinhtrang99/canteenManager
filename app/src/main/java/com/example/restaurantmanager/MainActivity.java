@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.restaurantmanager.acc.LoginActivity;
@@ -67,8 +68,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.acc:
                 AcountFragment acountFragment = new AcountFragment();
+                getFragment(acountFragment);
                 break;
         }
         return false;
+    }
+
+    public void getFragment(Fragment fragment) {
+        try {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment)
+                    .commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 }

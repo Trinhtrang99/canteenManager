@@ -9,34 +9,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.BaseFragment;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.FragmentAcountBinding;
-import com.example.restaurantmanager.datafake.Food;
-import com.example.restaurantmanager.fragmentmain.AdapterFood;
 import com.example.restaurantmanager.ultils.Constants;
 import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class AcountFragment extends BaseFragment {
 
     private FragmentAcountBinding binding;
     private PreferenceManager preferenceManager;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        binding.txtls.setOnClickListener(v -> {
-//            Intent i = new Intent(getContext(), HistoryActivity.class);
-//            startActivity(i);
-//        });
-    }
+    private Boolean isAdmin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +34,13 @@ public class AcountFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        if (isAdmin){
+            binding.txtdu.setVisibility(View.GONE);
+            binding.txtls.setVisibility(View.GONE);
+        }else {
+            binding.txtdu.setVisibility(View.VISIBLE);
+            binding.txtls.setVisibility(View.VISIBLE);
+        }
         preferenceManager = new PreferenceManager(getContext());
 
         getUser();

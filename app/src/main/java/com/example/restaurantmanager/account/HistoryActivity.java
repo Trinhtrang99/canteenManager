@@ -3,7 +3,6 @@ package com.example.restaurantmanager.account;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -11,7 +10,6 @@ import com.example.restaurantmanager.BaseActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityHistoryBinding;
 import com.example.restaurantmanager.ultils.Constants;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.kodmap.library.kmrecyclerviewstickyheader.KmHeaderItemDecoration;

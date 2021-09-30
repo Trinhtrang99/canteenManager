@@ -5,26 +5,89 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="20dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_baseline_menu_book_24" />
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:id="@+id/btlist"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_margin="20dp"-->
+        <!--            android:backgroundTint="@color/white"-->
+        <!--            android:src="@drawable/ic_baseline_menu_book_24" />-->
 
-        <HorizontalScrollView
+        <!--        <HorizontalScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_margin="10dp">-->
+
+        <!--            <view-->
+        <!--                android:id="@+id/line_view"-->
+        <!--                class="im.dacer.androidcharts.LineView"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent" />-->
+        <!--        </HorizontalScrollView>-->
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/maincolor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Thống kê"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_below="@id/toolbar"
+            android:layout_margin="20dp">
 
-            <view
-                android:id="@+id/line_view"
-                class="im.dacer.androidcharts.LineView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </HorizontalScrollView>
+            <Button
+                android:id="@+id/btnNhapThang"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:text="Thống kê nhập hàng / tháng"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnNhapNam"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:text="Thống kê nhập hàng / nam"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnDoanhThuThang"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/btnNhapThang"
+                android:text="Thống kê doang thu / thang"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnDoanhThuNam"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/btnNhapNam"
+                android:layout_alignParentRight="true"
+                android:text="Thống kê doang thu / năm"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnDoanhTrongNgay"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/btnDoanhThuThang"
+                android:text="Thống kê doang trong ngày"
+                android:textAllCaps="false" />
+        </RelativeLayout>
     </RelativeLayout>
 
 

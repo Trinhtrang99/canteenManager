@@ -58,6 +58,8 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        preferenceManager = new PreferenceManager(getContext());
+
         if (getActivity().getClass().equals(AdminActivity.class)) {
 
             idFoods = new ArrayList<>();
@@ -67,7 +69,6 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
 
         } else {
             pays = new ArrayList<>();
-            preferenceManager = new PreferenceManager(getContext());
 //            adapterFollower = new AdapterFood(ListData.list(), getContext(),false);
 //            RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
 //            binding.rc.setLayoutManager(layoutManager1);

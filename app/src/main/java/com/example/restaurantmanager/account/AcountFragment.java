@@ -34,14 +34,15 @@ public class AcountFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (isAdmin){
+        preferenceManager = new PreferenceManager(getContext());
+
+        if (!preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
             binding.txtdu.setVisibility(View.GONE);
             binding.txtls.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.txtdu.setVisibility(View.VISIBLE);
             binding.txtls.setVisibility(View.VISIBLE);
         }
-        preferenceManager = new PreferenceManager(getContext());
 
         getUser();
 

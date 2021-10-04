@@ -119,13 +119,17 @@ public class FragmentFood extends BaseFragment implements AdapterFood.OnLongPres
                 .addOnCompleteListener(task -> {
                     foods.clear();
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Food food = new Food(
-                                queryDocumentSnapshot.getString(Constants.KEY_NAME),
-                                Integer.parseInt(queryDocumentSnapshot.getString(Constants.KEY_PRICE)),
-                                queryDocumentSnapshot.getString(Constants.KEY_IMAGE)
-                        );
-                        food.setId(queryDocumentSnapshot.getId());
-                        foods.add(food);
+                        if (queryDocumentSnapshot.getString(Constants.KEY_PRICE) != null
+                         && !queryDocumentSnapshot.getString(Constants.KEY_PRICE).equals("")) {
+
+                            Food food = new Food(
+                                    queryDocumentSnapshot.getString(Constants.KEY_NAME),
+                                    Integer.parseInt(queryDocumentSnapshot.getString(Constants.KEY_PRICE)),
+                                    queryDocumentSnapshot.getString(Constants.KEY_IMAGE)
+                            );
+                            food.setId(queryDocumentSnapshot.getId());
+                            foods.add(food);
+                        }
                     }
 
                     adapterFollower = new AdapterFood(foods, getContext(), isAdmin, this);

@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.restaurantmanager.BaseActivity;
@@ -12,13 +13,14 @@ import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityCanteenBinding;
 import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.fragmentmain.AdapterFood;
+import com.example.restaurantmanager.model.ICallbackCheckBox;
 import com.example.restaurantmanager.ultils.Constants;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongPress {
+public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongPress, ICallbackCheckBox {
     private ActivityCanteenBinding binding;
     private AdapterFood adapterFood;
     private ArrayList<Food> foods;
@@ -31,6 +33,11 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
         foods = new ArrayList<>();
 
         getFoods();
+
+        binding.btnCart.setOnClickListener(view -> {
+            Intent intent = new Intent(ActivityCanteen.this, ActivityCart.class);
+            startActivity(intent);
+        });
     }
 
     private void getFoods () {
@@ -56,6 +63,7 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
                     }
 
                     adapterFood = new AdapterFood(foods, this, false, this);
+                    adapterFood.setCallbackCheckBox(this::listenCheckbox);
                     RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
                     binding.rc.setLayoutManager(layoutManager1);
                     binding.rc.setAdapter(adapterFood);
@@ -72,5 +80,10 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
     @Override
     public void onPressEdit(Food food) {
 
+    }
+
+    @Override
+    public void listenCheckbox(Integer totalMoney) {
+        binding.btnCart.setText("Giỏ hàng (" + totalMoney + "VND)");
     }
 }

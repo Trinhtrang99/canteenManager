@@ -54,7 +54,7 @@ public class ActivityAdMain extends AppCompatActivity {
             Intent i = new Intent(this,ActivityQLuser.class);
             startActivity(i);
         });
-        binding.btn9.setOnClickListener(v -> {
+        binding.btn10.setOnClickListener(v -> {
             Intent i = new Intent(this,ActivityDoiMk.class);
             startActivity(i);
         });

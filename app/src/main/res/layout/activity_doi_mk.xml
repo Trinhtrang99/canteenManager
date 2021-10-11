@@ -23,6 +23,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edt_old_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -41,6 +42,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edt_new_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -58,10 +60,12 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edt_new_password_again"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <Button
+            android:id="@+id/btn_ok"
             android:textColor="@color/white"
             android:background="@drawable/borderbtn"
             android:layout_marginTop="450dp"

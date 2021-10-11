@@ -5,10 +5,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.restaurantmanager.BaseActivity;
+import com.example.restaurantmanager.PayActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityFoodBinding;
 import com.example.restaurantmanager.datafake.Food;
@@ -35,6 +37,11 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
         foods = new ArrayList<>();
 
         getFoods();
+
+        binding.btnCart.setOnClickListener(view -> {
+            Intent intent = new Intent(ActivityFood.this, ActivityCart.class);
+            startActivity(intent);
+        });
     }
 
     private void getFoods () {
@@ -81,6 +88,6 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
 
     @Override
     public void listenCheckbox(Integer totalMoney) {
-        Toast.makeText(ActivityFood.this, totalMoney + "VND", Toast.LENGTH_SHORT).show();
+        binding.btnCart.setText("Giỏ hàng (" + totalMoney + "VND)");
     }
 }

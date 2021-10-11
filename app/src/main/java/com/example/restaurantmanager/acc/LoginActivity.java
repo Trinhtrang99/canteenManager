@@ -51,9 +51,6 @@ public class LoginActivity extends BaseActivity {
 
         binding.btnlogin.setOnClickListener(view -> {
             signIn();
-            /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();*/
         });
 
         binding.chkRememberMe.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -81,8 +78,9 @@ public class LoginActivity extends BaseActivity {
                         preferenceManager.putString(Constants.KEY_PASSWORD, documentSnapshot.getString(Constants.KEY_PASSWORD));
                         preferenceManager.putString(Constants.KEY_TYPE_USER, documentSnapshot.getString(Constants.KEY_TYPE_USER));
                         preferenceManager.putString(Constants.KEY_ID_USER, documentSnapshot.getId());
+                        preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
 
-                        if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
+                        if (!documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
                             preferenceManager.putString(Constants.KEY_SURPLUS, documentSnapshot.getString(Constants.KEY_SURPLUS));
 
                         }

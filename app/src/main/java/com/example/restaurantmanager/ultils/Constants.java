@@ -28,6 +28,7 @@ public class Constants {
     public final static String FOOD = "food";
     public final static String CANTEEN = "canteen";
     public final static String OFFICIALS = "official";
+    public final static String TYPE_OFFICIAL = "Quan chức";
 
     public final static String KEY_PREFERENCE_NAME = "preference";
     public final static String KEY_IS_REMEMBER_PASSWORD = "remember_password";

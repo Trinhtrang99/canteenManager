@@ -30,6 +30,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txt_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
@@ -40,6 +41,7 @@
                         android:textSize="25dp" />
 
                     <TextView
+                        android:id="@+id/txt_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -185,6 +187,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txt_surplus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"

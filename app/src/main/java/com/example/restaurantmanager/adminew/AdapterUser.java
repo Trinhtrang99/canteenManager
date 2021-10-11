@@ -14,7 +14,11 @@ import com.example.restaurantmanager.databinding.ItemuserBinding;
 import java.util.List;
 
 public class AdapterUser extends RecyclerView.Adapter<AdapterUser.ViewHolder> {
-    List<UserModel> list;
+    private List<UserModel> list;
+
+    public AdapterUser(List<UserModel> list) {
+        this.list = list;
+    }
 
     @NonNull
     @Override

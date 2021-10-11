@@ -85,7 +85,7 @@ public class RegisActivity extends AppCompatActivity {
             }
         };
 
-        binding.btnContinue.setOnClickListener(view -> {
+        binding.txtRegis.setOnClickListener(view -> {
             String phone = binding.edtSdt.getText().toString();
             FirebaseFirestore database = FirebaseFirestore.getInstance();
             database.collection(Constants.KEY_COLLECTION_ACCOUNT)
@@ -165,6 +165,7 @@ public class RegisActivity extends AppCompatActivity {
         user.put(Constants.KEY_PHONE_NUMBER, binding.edtSdt.getText().toString());
         user.put(Constants.KEY_PASSWORD, binding.edtMk.getText().toString());
         user.put(Constants.KEY_TYPE_USER, typeUser);
+        user.put(Constants.KEY_NAME, binding.edtName.getText().toString());
         database.collection(Constants.KEY_COLLECTION_ACCOUNT)
                 .add(user)
                 .addOnSuccessListener(documentReference -> {

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void listenCheckbox() {
+    public void listenCheckbox(Integer totalMoney) {
         binding.btnTotalMoney.setText(totalMoney + "VND");
 
     }

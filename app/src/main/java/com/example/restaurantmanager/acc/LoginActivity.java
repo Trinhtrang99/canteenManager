@@ -13,7 +13,9 @@ import com.example.restaurantmanager.BaseActivity;
 import com.example.restaurantmanager.MainActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.admin.AdminActivity;
+import com.example.restaurantmanager.adminew.ActivityAdMain;
 import com.example.restaurantmanager.databinding.ActivityLoginBinding;
+import com.example.restaurantmanager.mainnew.ActivityMainNew;
 import com.example.restaurantmanager.ultils.Constants;
 import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -87,9 +89,9 @@ public class LoginActivity extends BaseActivity {
 
                         Intent intent;
                         if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
-                            intent = new Intent(getApplicationContext(), AdminActivity.class);
+                            intent = new Intent(getApplicationContext(), ActivityAdMain.class);
                         } else {
-                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent = new Intent(getApplicationContext(), ActivityMainNew.class);
                         }
                         startActivity(intent);
                         finish();

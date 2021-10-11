@@ -31,12 +31,19 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
     private Context context;
     private Boolean isAdmin;
     private OnLongPress onLongPress;
+    private Integer totalMoney;
+    private ICallbackCheckBox callbackCheckBox;
+
+    public void setCallbackCheckBox(ICallbackCheckBox callbackCheckBox) {
+        this.callbackCheckBox = callbackCheckBox;
+    }
 
     public AdapterFood(ArrayList<Food> list, Context context, Boolean isAdmin, OnLongPress onLongPress) {
         this.list = list;
         this.context = context;
         this.isAdmin = isAdmin;
         this.onLongPress = onLongPress;
+        totalMoney = 0;
     }
 
     @NonNull
@@ -74,7 +81,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                 if (isChecked) {
                     MainActivity.pays.add(new Pay(list.get(position).getId(), list.get(position).getImg(),
                             list.get(position).getName(), String.valueOf(list.get(position).getPrice())));
-                    MainActivity.totalMoney += list.get(position).getPrice();
+                    totalMoney += list.get(position).getPrice();
                 } else {
                     for (int i = 0; i < MainActivity.pays.size(); i++) {
                         if (list.get(position).getId().equals(MainActivity.pays.get(i).getId())) {
@@ -82,11 +89,11 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                             break;
                         }
                     }
-                    MainActivity.totalMoney -= list.get(position).getPrice();
+                    totalMoney -= list.get(position).getPrice();
                 }
 
-                if (MainActivity.callbackCheckBox != null) {
-                    MainActivity.callbackCheckBox.listenCheckbox();
+                if (callbackCheckBox != null) {
+                    callbackCheckBox.listenCheckbox(totalMoney);
                 }
             });
         }
@@ -113,7 +120,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
         }
     }
 
-    interface OnLongPress{
+    public interface OnLongPress{
         void onLongPress(String idFood);
         void onPressEdit(Food food);
     }

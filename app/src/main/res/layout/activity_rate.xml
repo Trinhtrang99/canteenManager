@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C9C0FF"
+        android:orientation="vertical"
+     >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/work_sans_extrabold"
+            android:gravity="center"
+            android:text="KMA CANTEEN"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/work_sans_extrabold"
+            android:gravity="center"
+            android:text="ĐÁNH GIÁ"
+            android:textSize="30dp" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderwwhite"
+            android:text="Đánh giá của học sinh"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <Button
+            android:layout_marginBottom="2dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderwwhite"
+            android:text="Đánh giá của quan chức"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</layout>

@@ -38,11 +38,19 @@ public class HistoryActivity extends BaseActivity implements OnOptionChangedList
     private List<String> years;
     private String year;
 
+    int category ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_history);
-
+        if (getIntent() != null) {
+            if (category == 1) {
+                // tk user
+            } else if (category == 2) {
+                // tk quan chúc
+            }
+        }
         years = new ArrayList<>();
         histories = new ArrayList<>();
         initAdapter();
@@ -81,7 +89,7 @@ public class HistoryActivity extends BaseActivity implements OnOptionChangedList
         binding.recyclerView.setAdapter(adapter);
     }
 
-    private void getYear () {
+    private void getYear() {
         showProgressDialog(true);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -98,6 +106,7 @@ public class HistoryActivity extends BaseActivity implements OnOptionChangedList
     }
 
     private int countMonth;
+
     private void getFoodManager() {
         showProgressDialog(true);
         histories.clear();
@@ -136,7 +145,7 @@ public class HistoryActivity extends BaseActivity implements OnOptionChangedList
                                             History history = new History();
                                             if (queryDocumentSnapshot.getString(Constants.KEY_TIME) != null) {
                                                 Integer time = Integer.parseInt(queryDocumentSnapshot.getString(Constants.KEY_TIME));
-                                                if(time >= 6 && time <= 12) {
+                                                if (time >= 6 && time <= 12) {
                                                     history.setTime("Sáng");
                                                 } else if (time >= 12 && time <= 18) {
                                                     history.setTime("Chiều");

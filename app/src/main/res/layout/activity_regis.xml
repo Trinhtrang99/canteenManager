@@ -9,20 +9,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A3B8F8"
+        android:background="@drawable/backdround"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:letterSpacing="0.6"
+            android:singleLine="true"
+            android:text="KMA CANTEEN"
+            android:textColor="#FFF973"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:textAllCaps="true"
+            android:letterSpacing="0.2"
             android:id="@+id/tvlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:text="Đăng kí Tài Khoản"
-            android:textColor="@color/white"
+            android:text="Đăng ký"
+            android:textColor="#FFD705"
             android:textSize="40dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,63 +55,111 @@
                 android:id="@+id/tvSdt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:text="Số điện thoại"
-                android:textColor="@color/black"
+                android:layout_marginTop="105dp"
+                android:fontFamily="@font/work_sans_extrabold"
+                android:text="Số đt : "
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/edtSdt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/black"
-                android:hint="Nhập số điện thoại"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="100dp"
+                android:background="@color/white"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/tvSdt" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvSdt"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvMk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Mật khẩu"
-                android:textColor="@color/black"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/work_sans_extrabold"
+                android:text="Mật khẩu : "
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edtSdt" />
 
             <EditText
                 android:id="@+id/edtMk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/black"
-                android:hint="Nhập mật khẩu"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/white"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvMk"
+                app:layout_constraintTop_toBottomOf="@+id/edtSdt" />
+
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/work_sans_extrabold"
+                android:text="Tên người dùng: "
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvMk" />
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="35dp"
+                android:background="@color/white"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_name"
+                app:layout_constraintTop_toBottomOf="@id/tvMk" />
+
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/edtMk">
-            </Spinner>
+                android:layout_width="100dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_name" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:id="@+id/btn_continue"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/alert_btn"
-                android:text="Tiếp tục"
-                android:textAllCaps="false"
-                app:layout_constraintTop_toBottomOf="@id/edtMk" />
+                android:fontFamily="@font/work_sans_extrabold"
+                android:letterSpacing="0.2"
+                android:text="Đăng ký"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner" />
 
-
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/work_sans_extrabold"
+                android:letterSpacing="0.2"
+                android:text="Quay lại"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -101,9 +167,9 @@
             android:id="@+id/cl_verification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="100dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="100dp"
+            android:orientation="vertical"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tvlogin">
 
@@ -118,9 +184,9 @@
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="xác nhận"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:text="xác nhận"
                 app:layout_constraintTop_toBottomOf="@+id/edt_verification_code" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

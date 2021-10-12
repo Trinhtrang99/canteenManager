@@ -24,6 +24,8 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
     private ActivityCanteenBinding binding;
     private AdapterFood adapterFood;
     private ArrayList<Food> foods;
+    public static ArrayList<Food> chooseFoods;
+    private Integer totalMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,14 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
         binding = DataBindingUtil.setContentView(this, R.layout.activity_canteen);
 
         foods = new ArrayList<>();
+        chooseFoods = new ArrayList<>();
 
         getFoods();
 
         binding.btnCart.setOnClickListener(view -> {
             Intent intent = new Intent(ActivityCanteen.this, ActivityCart.class);
+            intent.putExtra(Constants.TYPE_FOOD, Constants.CANTEEN);
+            intent.putExtra(Constants.KEY_TOTAL_MONEY, totalMoney);
             startActivity(intent);
         });
     }
@@ -83,7 +88,10 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
     }
 
     @Override
-    public void listenCheckbox(Integer totalMoney) {
+    public void listenCheckbox(Integer totalMoney, ArrayList<Food> foods) {
+        chooseFoods.clear();
+        chooseFoods.addAll(foods);
+        this.totalMoney = totalMoney;
         binding.btnCart.setText("Giỏ hàng (" + totalMoney + "VND)");
     }
 }

@@ -14,7 +14,11 @@ import com.example.restaurantmanager.databinding.ItemkhoBinding;
 import java.util.List;
 
 public class AdapterQLKho extends RecyclerView.Adapter<AdapterQLKho.ViewHolder> {
-    List<KhoMOdel> list;
+    private List<KhoMOdel> list;
+
+    public AdapterQLKho(List<KhoMOdel> list) {
+        this.list = list;
+    }
 
     @NonNull
     @Override

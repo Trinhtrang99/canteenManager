@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
     private ArrayList<Food> list;
+    private ArrayList<Food> foods;
     private Context context;
     private Boolean isAdmin;
     private OnLongPress onLongPress;
@@ -44,6 +45,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
         this.isAdmin = isAdmin;
         this.onLongPress = onLongPress;
         totalMoney = 0;
+        foods = new ArrayList<>();
     }
 
     @NonNull
@@ -79,13 +81,12 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    MainActivity.pays.add(new Pay(list.get(position).getId(), list.get(position).getImg(),
-                            list.get(position).getName(), String.valueOf(list.get(position).getPrice())));
+                    foods.add(list.get(position));
                     totalMoney += list.get(position).getPrice();
                 } else {
-                    for (int i = 0; i < MainActivity.pays.size(); i++) {
-                        if (list.get(position).getId().equals(MainActivity.pays.get(i).getId())) {
-                            MainActivity.pays.remove(i);
+                    for (int i = 0; i < foods.size(); i++) {
+                        if (list.get(position).getId().equals(foods.get(i).getId())) {
+                           foods.remove(i);
                             break;
                         }
                     }
@@ -93,7 +94,7 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                 }
 
                 if (callbackCheckBox != null) {
-                    callbackCheckBox.listenCheckbox(totalMoney);
+                    callbackCheckBox.listenCheckbox(totalMoney, foods);
                 }
             });
         }

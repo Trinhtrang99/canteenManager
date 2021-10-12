@@ -28,6 +28,8 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
     // dùng adaper này nhé
     private AdapterFood adapterFood;
     private ArrayList<Food> foods;
+    public static ArrayList<Food> chooseFoods;
+    private Integer totalMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,14 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
         binding = DataBindingUtil.setContentView(this, R.layout.activity_food);
 
         foods = new ArrayList<>();
+        chooseFoods = new ArrayList<>();
 
         getFoods();
 
         binding.btnCart.setOnClickListener(view -> {
             Intent intent = new Intent(ActivityFood.this, ActivityCart.class);
+            intent.putExtra(Constants.TYPE_FOOD, Constants.FOOD);
+            intent.putExtra(Constants.KEY_TOTAL_MONEY, totalMoney);
             startActivity(intent);
         });
     }
@@ -87,7 +92,10 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
     }
 
     @Override
-    public void listenCheckbox(Integer totalMoney) {
+    public void listenCheckbox(Integer totalMoney, ArrayList<Food> foods) {
+        chooseFoods.clear();
+        chooseFoods.addAll(foods);
+        this.totalMoney = totalMoney;
         binding.btnCart.setText("Giỏ hàng (" + totalMoney + "VND)");
     }
 }

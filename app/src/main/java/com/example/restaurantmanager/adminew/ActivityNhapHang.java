@@ -126,29 +126,13 @@ public class ActivityNhapHang extends BaseActivity {
         foods.put(Constants.KEY_UNIT, String.valueOf(unit));
         foods.put(Constants.TYPE_FOOD, type);
         foods.put(Constants.KEY_TOTAL_MONEY, String.valueOf(totalMoney));
-        foods.put(Constants.KEY_DAY, new SimpleDateFormat("dd").format(new Date()));
-        foods.put(Constants.KEY_TIME, new SimpleDateFormat("HH").format(new Date()));
+        foods.put(Constants.KEY_DAY, new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
-        String year = new SimpleDateFormat("yyyy").format(new Date());
-        String month = new SimpleDateFormat("M").format(new Date());
         db.collection(Constants.KEY_COLLECTION_FOOD_MANAGER)
-                .document(year)
-                .collection(Constants.KEY_COLLECTION_MONTH)
-                .document(month)
-                .collection(Constants.KEY_FOOD_BY_DAY)
                 .add(foods)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(ActivityNhapHang.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     showProgressDialog(false);
                 });
-
-
-        HashMap<String, Object> userAdmin = new HashMap<>();
-        Integer surplus = Integer.parseInt(preferenceManager.getString(Constants.KEY_SURPLUS));
-        surplus = surplus - totalMoney;
-        userAdmin.put(Constants.KEY_SURPLUS, String.valueOf(surplus));
-        db.collection(Constants.KEY_COLLECTION_ACCOUNT)
-                .document(preferenceManager.getString(Constants.KEY_ID_USER))
-                .update(userAdmin);
     }
 }

@@ -16,6 +16,7 @@ import com.example.restaurantmanager.acc.LoginActivity;
 import com.example.restaurantmanager.account.AcountFragment;
 import com.example.restaurantmanager.adapter.AdapterViewPager;
 import com.example.restaurantmanager.databinding.ActivityMainBinding;
+import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.model.ICallbackCheckBox;
 import com.example.restaurantmanager.model.Pay;
 import com.example.restaurantmanager.ultils.PreferenceManager;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void listenCheckbox(Integer totalMoney) {
+    public void listenCheckbox(Integer totalMoney, ArrayList<Food> foods) {
         binding.btnTotalMoney.setText(totalMoney + "VND");
 
     }

@@ -25,6 +25,7 @@ public class LoginActivity extends BaseActivity {
 
     private ActivityLoginBinding binding;
     private PreferenceManager preferenceManager;
+    private boolean isChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,11 @@ public class LoginActivity extends BaseActivity {
 
         if (preferenceManager.getBoolean(Constants.KEY_IS_REMEMBER_PASSWORD)) {
             if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
-                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityAdMain.class);
                 startActivity(intent);
                 finish();
             } else {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityMainNew.class);
                 startActivity(intent);
                 finish();
             }
@@ -51,10 +52,11 @@ public class LoginActivity extends BaseActivity {
 
         binding.btnlogin.setOnClickListener(view -> {
             signIn();
+            preferenceManager.putBoolean(Constants.KEY_IS_REMEMBER_PASSWORD, isChecked);
         });
 
         binding.chkRememberMe.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            preferenceManager.putBoolean(Constants.KEY_IS_REMEMBER_PASSWORD, isChecked);
+            this.isChecked = isChecked;
         });
 
         binding.forgotBtn.setOnClickListener(view -> {

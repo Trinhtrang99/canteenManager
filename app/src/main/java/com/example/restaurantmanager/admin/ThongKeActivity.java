@@ -48,12 +48,12 @@ public class ThongKeActivity extends AppCompatActivity {
     }
 
     private void initAdapter() {
-        adapter = new AdapterNhap();
+       /* adapter = new AdapterNhap();
         layoutManager = new LinearLayoutManager(this);
         //   recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        binding.rc.setLayoutManager(layoutManager);
-        kmHeaderItemDecoration = new KmHeaderItemDecoration(adapter);
-        binding.rc.setAdapter(adapter);
+        binding.rc.setLayoutManager(layoutManager);*/
+        /*kmHeaderItemDecoration = new KmHeaderItemDecoration(adapter);
+        binding.rc.setAdapter(adapter);*/
 
     }
 
@@ -71,6 +71,6 @@ public class ThongKeActivity extends AppCompatActivity {
                 modelList.add(model);
             }
         }
-        adapter.submitList(modelList);
+      //  adapter.submitList(modelList);
     }
 }

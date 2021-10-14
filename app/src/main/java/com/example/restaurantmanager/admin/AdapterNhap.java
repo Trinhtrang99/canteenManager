@@ -7,17 +7,60 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.account.ItemType;
+import com.example.restaurantmanager.adminew.model.Revenue;
+import com.example.restaurantmanager.databinding.ItemthongkenhapBinding;
 import com.kodmap.library.kmrecyclerviewstickyheader.KmStickyListener;
 
-public class AdapterNhap extends ListAdapter<Nhap, RecyclerView.ViewHolder> implements KmStickyListener {
+import java.util.List;
 
-    public AdapterNhap() {
+public class AdapterNhap extends RecyclerView.Adapter<AdapterNhap.MyViewHolder>{
+
+    private List<Revenue> revenues;
+
+    public AdapterNhap(List<Revenue> revenues) {
+        this.revenues = revenues;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemthongkenhapBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.itemthongkenhap,
+                parent,
+                false
+        );
+        return new MyViewHolder(binding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.binding.tvloai.setText(revenues.get(position).getType());
+        holder.binding.txtGia.setText("Giá: " + revenues.get(position).getPrice());
+       // holder.binding.txtTotalMoney.setText("Tổng tiền:" + revenues.get(position).getTotalMoney());
+    }
+
+    @Override
+    public int getItemCount() {
+        return revenues.size();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private ItemthongkenhapBinding binding;
+        public MyViewHolder(@NonNull ItemthongkenhapBinding itemView) {
+            super(itemView.getRoot());
+            binding = itemView;
+        }
+    }
+
+   /* public AdapterNhap() {
         super(ModelDiffUtilCallback);
     }
 
@@ -127,5 +170,5 @@ public class AdapterNhap extends ListAdapter<Nhap, RecyclerView.ViewHolder> impl
                 public boolean areContentsTheSame(@NonNull Nhap model, @NonNull Nhap t1) {
                     return model.equals(t1);
                 }
-            };
+            };*/
 }

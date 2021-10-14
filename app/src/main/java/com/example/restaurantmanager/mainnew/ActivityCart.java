@@ -64,11 +64,11 @@ public class ActivityCart extends BaseActivity implements AdapterFood.OnLongPres
             foods.put(Constants.KEY_NAME, food.getName());
             foods.put(Constants.KEY_PRICE, food.getPrice());
             foods.put(Constants.KEY_IMAGE, food.getImg());
+            foods.put(Constants.KEY_PHONE_NUMBER, preferenceManager.getString(Constants.KEY_PHONE_NUMBER));
             foods.put(Constants.KEY_TOTAL_MONEY, getIntent().getIntExtra(Constants.KEY_TOTAL_MONEY, 0));
-            foods.put(Constants.KEY_TIME,  new SimpleDateFormat("dd/MM/yyyy_HH:mm").format(new Date()));
+            foods.put(Constants.KEY_DAY, new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+            foods.put(Constants.KEY_TIME, new SimpleDateFormat("HH:mm").format(new Date()));
             db.collection(Constants.KEY_COLLECTION_ORDER)
-                    .document(preferenceManager.getString(Constants.KEY_PHONE_NUMBER))
-                    .collection(Constants.KEY_COLLECTION_ORDER_DETAIL)
                     .add(foods)
                     .addOnSuccessListener(documentReference -> {
                         count++;

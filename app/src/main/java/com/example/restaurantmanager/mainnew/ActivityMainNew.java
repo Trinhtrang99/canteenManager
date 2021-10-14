@@ -50,7 +50,7 @@ public class ActivityMainNew extends AppCompatActivity {
             startActivity(new Intent(this, ActivityThamKhoa.class));
         });
         binding.history.setOnClickListener(v -> {
-            Intent i = new Intent(this, HistoryActivity.class);
+            Intent i = new Intent(this, ActivityHistory.class);
             i.putExtra("category", category);
             startActivity(i);
         });

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.restaurantmanager.BaseActivity;
+import com.example.restaurantmanager.CommentActivity;
 import com.example.restaurantmanager.PayActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityFoodBinding;
@@ -83,7 +84,9 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
 
     @Override
     public void onLongPress(String idFood) {
-
+        Intent intent = new Intent(ActivityFood.this, CommentActivity.class);
+        intent.putExtra(Constants.KEY_ID_FOOD, idFood);
+        startActivity(intent);
     }
 
     @Override

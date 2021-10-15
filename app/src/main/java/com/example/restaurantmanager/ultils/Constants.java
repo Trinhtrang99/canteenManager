@@ -24,6 +24,7 @@ public class Constants {
     public final static String KEY_COLLECTION_MONTH = "month";
     public final static String KEY_FOOD_BY_DAY = "foodByDay";
     public final static String KEY_COLLECTION_ORDER = "orders";
+    public final static String KEY_COLLECTION_COMMENT = "comments";
     public final static String KEY_COLLECTION_ORDER_DETAIL = "orderDetail";
     public final static String FOOD = "food";
     public final static String CANTEEN = "canteen";
@@ -31,6 +32,8 @@ public class Constants {
     public final static String TYPE_OFFICIAL = "Quan chức";
     public final static String TYPE_BOTTLE = "chai";
     public final static String TYPE_FEMALE = "cái";
+    public final static String KEY_TITLE = "title";
+    public final static String KEY_ID_FOOD = "idFood";
 
     public final static String KEY_PREFERENCE_NAME = "preference";
     public final static String KEY_IS_REMEMBER_PASSWORD = "remember_password";

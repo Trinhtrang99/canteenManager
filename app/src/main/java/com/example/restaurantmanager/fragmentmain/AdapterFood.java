@@ -74,9 +74,6 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                 holder.checkBox.setChecked(true);
                 return true;
             });
-            holder.rl.setOnClickListener(v -> {
-                onLongPress.onPressEdit(list.get(position));
-            });
         } else {
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -96,6 +93,11 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                 if (callbackCheckBox != null) {
                     callbackCheckBox.listenCheckbox(totalMoney, foods);
                 }
+            });
+
+            holder.rl.setOnLongClickListener(view -> {
+                onLongPress.onLongPress(list.get(position).getId());
+                return false;
             });
         }
     }

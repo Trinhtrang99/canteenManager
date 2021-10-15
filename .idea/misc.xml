@@ -9,6 +9,7 @@
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_admin.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_canteen.xml" value="0.24375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_cart.xml" value="0.259375" />
+        <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_comment.xml" value="0.24375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_doanh_thu.xml" value="0.24375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_doi_mk.xml" value="0.259375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_edit.xml" value="0.3567708333333333" />
@@ -22,6 +23,7 @@
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_main_new.xml" value="0.24375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_nhap.xml" value="0.259375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_nhap_hang.xml" value="0.24375" />
+        <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_order.xml" value="0.2" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_pay.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_qlkho.xml" value="0.24375" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/activity_qluser.xml" value="0.259375" />
@@ -34,6 +36,8 @@
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/fragmentdrink.xml" value="0.33229166666666665" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/framentfood.xml" value="0.3723958333333333" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/item.xml" value="0.259375" />
+        <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/item_comment.xml" value="0.24375" />
+        <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/item_order.xml" value="0.264" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/item_pay.xml" value="0.3098958333333333" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/item_post.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/tung0/Documents/canteenManager/app/src/main/res/layout/itemkho.xml" value="0.24375" />

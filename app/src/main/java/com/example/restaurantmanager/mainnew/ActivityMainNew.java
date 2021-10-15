@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.restaurantmanager.OrderActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.acc.LoginActivity;
 import com.example.restaurantmanager.account.HistoryActivity;
@@ -64,5 +65,7 @@ public class ActivityMainNew extends AppCompatActivity {
             i.putExtra("category", category);
             startActivity(i);
         });
+
+        binding.btnOrder.setOnClickListener(view -> startActivity(new Intent(ActivityMainNew.this, OrderActivity.class)));
     }
 }

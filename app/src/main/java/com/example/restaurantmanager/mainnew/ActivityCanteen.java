@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.restaurantmanager.BaseActivity;
+import com.example.restaurantmanager.CommentActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityCanteenBinding;
 import com.example.restaurantmanager.datafake.Food;
@@ -79,7 +80,9 @@ public class ActivityCanteen extends BaseActivity implements AdapterFood.OnLongP
 
     @Override
     public void onLongPress(String idFood) {
-
+        Intent intent = new Intent(ActivityCanteen.this, CommentActivity.class);
+        intent.putExtra(Constants.KEY_ID_FOOD, idFood);
+        startActivity(intent);
     }
 
     @Override

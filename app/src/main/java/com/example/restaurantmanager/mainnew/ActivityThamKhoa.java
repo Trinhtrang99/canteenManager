@@ -9,7 +9,7 @@ import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityThamKhoaBinding;
 
 public class ActivityThamKhoa extends AppCompatActivity {
-    ActivityThamKhoaBinding binding;
+    private ActivityThamKhoaBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

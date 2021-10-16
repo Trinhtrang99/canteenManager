@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityAdMainBinding;
+import com.example.restaurantmanager.databinding.ActivityDoanhThuBindingImpl;
+import com.example.restaurantmanager.mainnew.ActivityThamKhoa;
 
 public class ActivityAdMain extends AppCompatActivity {
     ActivityAdMainBinding binding;
@@ -36,7 +38,7 @@ public class ActivityAdMain extends AppCompatActivity {
             startActivity(i);
         });
         binding.btn5.setOnClickListener(v -> {
-
+            startActivity(new Intent(this, ActivityThamKhoa.class));
         });
         binding.btn6.setOnClickListener(v -> {
             Intent i = new Intent(this,ActivityNhapHang.class);

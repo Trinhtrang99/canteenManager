@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity {
                         Intent intent;
                         if (documentSnapshot.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_ADMIN)) {
                             intent = new Intent(getApplicationContext(), ActivityAdMain.class);
+                            preferenceManager.putString(Constants.KEY_NAME, "Admin");
                         } else {
                             intent = new Intent(getApplicationContext(), ActivityMainNew.class);
                         }

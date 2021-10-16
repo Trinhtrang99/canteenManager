@@ -1,235 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/b1"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/backgroadsv"
-        android:orientation="vertical"
-        android:weightSum="4">
+        android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/backgroadsv"
+            android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/backgroadsv"
-                android:orientation="vertical"
-                android:weightSum="4">
+                android:layout_height="200dp"
+                android:background="@color/yellow"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/yellow"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/work_sans_extrabold"
-                        android:text="Trịnh Xuân Quang"
-                        android:textColor="#0400B7"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/txt_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:fontFamily="@font/work_sans_extrabold"
-                        android:text="Số ĐT: 0968868523 "
-                        android:textColor="#0400B7"
-                        android:textSize="25dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="30dp"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
+                    android:fontFamily="@font/work_sans_extrabold"
+                    android:text="Trịnh Xuân Quang"
+                    android:textColor="#0400B7"
+                    android:textSize="25dp" />
 
-                    <RelativeLayout
-                        android:id="@+id/rlfood"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:background="@drawable/border_share">
+                <TextView
+                    android:id="@+id/txt_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/work_sans_extrabold"
+                    android:text="Số ĐT: 0968868523 "
+                    android:textColor="#0400B7"
+                    android:textSize="25dp" />
+            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="2.5dp"
-                            android:alpha="0.7"
-                            android:background="#C4C4C4"
-                            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="3"
+                android:orientation="vertical">
 
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="20dp"
-                            android:src="@drawable/monan" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="200dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Món ăn"
-                            android:textColor="@color/black"
-                            android:textSize="30dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rlcanteen"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border_share"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="2.5dp"
-                            android:alpha="0.7"
-                            android:background="#C4C4C4"
-                            android:orientation="horizontal">
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="20dp"
-                            android:src="@drawable/cangteen" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="200dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Canteen"
-                            android:textColor="@color/black"
-                            android:textSize="30dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rlquanchuc"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border_share"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="2.5dp"
-                            android:alpha="0.7"
-                            android:background="#C4C4C4"
-                            android:orientation="horizontal">
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="20dp"
-                            android:src="@drawable/list" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="200dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Tham khảo ý kiến"
-                            android:textColor="@color/black"
-                            android:textSize="30dp" />
-                    </RelativeLayout>
-
-                    <Button
-                        android:id="@+id/btn_order"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:background="@drawable/borderbtn"
-                        android:text="Đơn hàng"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/rlfood"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/border_share">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:background="#AFA2FD"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:layout_margin="2.5dp"
+                        android:alpha="0.7"
+                        android:background="#C4C4C4"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/txt_surplus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text=" Số dư: "
-                            android:textColor="#05003E" />
 
-                        <TextView
-                            android:id="@+id/history"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Lịch sử đặt hàng : "
-                            android:textColor="#05003E" />
-
-                        <TextView
-                            android:id="@+id/changepass"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Thay đổi mật khẩu "
-                            android:textColor="#05003E" />
-
-                        <TextView
-                            android:id="@+id/logout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="20dp"
-                            android:layout_marginVertical="10dp"
-                            android:fontFamily="@font/work_sans_extrabold"
-                            android:text="Đăng suất "
-                            android:textColor="#05003E" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/monan" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="200dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Món ăn"
+                        android:textColor="@color/black"
+                        android:textSize="30dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlcanteen"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_share"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2.5dp"
+                        android:alpha="0.7"
+                        android:background="#C4C4C4"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/cangteen" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="200dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Canteen"
+                        android:textColor="@color/black"
+                        android:textSize="30dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlquanchuc"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_share"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2.5dp"
+                        android:alpha="0.7"
+                        android:background="#C4C4C4"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/list" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="200dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Tham khảo ý kiến"
+                        android:textColor="@color/black"
+                        android:textSize="30dp" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btn_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/borderbtn"
+                    android:text="Đơn hàng"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="#AFA2FD"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_surplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text=" Số dư: "
+                        android:textColor="#05003E" />
+
+                    <TextView
+                        android:id="@+id/history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Lịch sử đặt hàng : "
+                        android:textColor="#05003E" />
+
+                    <TextView
+                        android:id="@+id/changepass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Thay đổi mật khẩu "
+                        android:textColor="#05003E" />
+
+                    <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/work_sans_extrabold"
+                        android:text="Đăng suất "
+                        android:textColor="#05003E" />
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
+
 </layout>

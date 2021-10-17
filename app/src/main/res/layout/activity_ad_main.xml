@@ -135,6 +135,16 @@
             android:text="ĐỔI MẬT KHẨU"
             android:textColor="@color/black"
             android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnlogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/borderwwhite"
+            android:text="Đăng xuất"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </layout>

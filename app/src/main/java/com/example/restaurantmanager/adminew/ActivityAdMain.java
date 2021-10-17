@@ -19,48 +19,51 @@ public class ActivityAdMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ad_main);
         binding.btn1.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityAddFoof.class);
-            i.putExtra("type",1);
+            Intent i = new Intent(this, ActivityAddFoof.class);
+            i.putExtra("type", 1);
             startActivity(i);
         });
         binding.btn2.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityAddFoof.class);
-            i.putExtra("type",2);
+            Intent i = new Intent(this, ActivityAddFoof.class);
+            i.putExtra("type", 2);
             startActivity(i);
         });
         binding.btn3.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityAddFoof.class);
-            i.putExtra("type",3);
+            Intent i = new Intent(this, ActivityAddFoof.class);
+            i.putExtra("type", 3);
             startActivity(i);
         });
         binding.btn4.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityDoanhThu.class);
+            Intent i = new Intent(this, ActivityDoanhThu.class);
             startActivity(i);
         });
         binding.btn5.setOnClickListener(v -> {
             startActivity(new Intent(this, ActivityThamKhoa.class));
         });
         binding.btn6.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityNhapHang.class);
+            Intent i = new Intent(this, ActivityNhapHang.class);
             startActivity(i);
         });
         binding.btn7.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityQLkho.class);
+            Intent i = new Intent(this, ActivityQLkho.class);
             startActivity(i);
         });
         binding.btn8.setOnClickListener(v -> {
-            Intent i = new Intent(this,RateActivity.class);
+            Intent i = new Intent(this, RateActivity.class);
             startActivity(i);
         });
         binding.btn9.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityQLuser.class);
+            Intent i = new Intent(this, ActivityQLuser.class);
             startActivity(i);
         });
         binding.btn10.setOnClickListener(v -> {
-            Intent i = new Intent(this,ActivityDoiMk.class);
+            Intent i = new Intent(this, ActivityDoiMk.class);
             startActivity(i);
         });
-
+        binding.btnlogout.setOnClickListener(v -> {
+//            Intent i = new Intent(this, LoginActivity.class);
+//            startActivity(i);
+        });
 
     }
 }

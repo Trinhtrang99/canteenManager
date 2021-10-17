@@ -6,7 +6,6 @@
         android:id="@+id/b1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroadsv"
         android:orientation="vertical"
         android:weightSum="4">
 
@@ -23,7 +22,7 @@
                 android:fontFamily="@font/work_sans_extrabold"
                 android:gravity="center"
                 android:text="CANTEEN"
-                android:textColor="@color/black"
+                android:textColor="#1E6FE9"
                 android:textSize="30dp" />
         </LinearLayout>
 
@@ -39,6 +38,7 @@
         </LinearLayout>
 
         <Button
+            android:layout_marginHorizontal="10dp"
             android:id="@+id/btn_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

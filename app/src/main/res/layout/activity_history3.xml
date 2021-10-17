@@ -18,7 +18,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="10dp"
-                android:text="Lịch sử đặt hàng"
+                android:text="Lịch sử nhập hàng"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />

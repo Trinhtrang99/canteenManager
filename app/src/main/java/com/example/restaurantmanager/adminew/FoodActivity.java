@@ -1,4 +1,4 @@
-package com.example.restaurantmanager.mainnew;
+package com.example.restaurantmanager.adminew;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -10,54 +10,54 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.restaurantmanager.BaseActivity;
-import com.example.restaurantmanager.CommentActivity;
-import com.example.restaurantmanager.PayActivity;
 import com.example.restaurantmanager.R;
-import com.example.restaurantmanager.databinding.ActivityFoodBinding;
+import com.example.restaurantmanager.databinding.ActivityFood2Binding;
 import com.example.restaurantmanager.datafake.Food;
 import com.example.restaurantmanager.fragmentmain.AdapterFood;
-import com.example.restaurantmanager.model.ICallbackCheckBox;
 import com.example.restaurantmanager.ultils.Constants;
-import com.example.restaurantmanager.ultils.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPress, ICallbackCheckBox {
-    private ActivityFoodBinding binding;
-    // dùng adaper này nhé
+public class FoodActivity extends BaseActivity implements AdapterFood.OnLongPress{
+
     private AdapterFood adapterFood;
     private ArrayList<Food> foods;
-    public static ArrayList<Food> chooseFoods;
-    private Integer totalMoney;
+    private ActivityFood2Binding binding;
+    private Integer type;
     private String typeFood;
-    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_food);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_food2);
 
         foods = new ArrayList<>();
-        chooseFoods = new ArrayList<>();
-        preferenceManager = new PreferenceManager(getApplicationContext());
 
-        if (preferenceManager.getString(Constants.KEY_TYPE_USER).equals(Constants.TYPE_OFFICIAL)) {
-            typeFood = Constants.OFFICIALS;
-        } else {
-            typeFood = Constants.FOOD;
+        if (getIntent() != null) {
+            type = getIntent().getIntExtra("type", 0);
         }
+        if (type != null) {
+            if (type == 1) {
+                binding.txtTitle.setText("Món ăn");
+                typeFood = Constants.FOOD;
+            } else if (type == 2) {
+                binding.txtTitle.setText("CanTeen");
+                typeFood = Constants.CANTEEN;
+            } else {
+                binding.txtTitle.setText("THỰC ĐƠN QUAN CHỨC");
+                typeFood = Constants.OFFICIALS;
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         getFoods();
-
-        binding.btnCart.setOnClickListener(view -> {
-            Intent intent = new Intent(ActivityFood.this, ActivityCart.class);
-            intent.putExtra(Constants.TYPE_FOOD, Constants.FOOD);
-            intent.putExtra(Constants.KEY_TOTAL_MONEY, totalMoney);
-            startActivity(intent);
-        });
     }
 
     private void getFoods () {
@@ -82,11 +82,10 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
                         }
                     }
 
-                    adapterFood = new AdapterFood(foods, this, false, this);
-                    adapterFood.setCallbackCheckBox(this::listenCheckbox);
+                    adapterFood = new AdapterFood(foods, this, true, this);
                     RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
-                    binding.rc.setLayoutManager(layoutManager1);
-                    binding.rc.setAdapter(adapterFood);
+                    binding.rvFood.setLayoutManager(layoutManager1);
+                    binding.rvFood.setAdapter(adapterFood);
 
                     showProgressDialog(false);
                 });
@@ -94,21 +93,18 @@ public class ActivityFood extends BaseActivity implements AdapterFood.OnLongPres
 
     @Override
     public void onLongPress(String idFood) {
-        Intent intent = new Intent(ActivityFood.this, CommentActivity.class);
-        intent.putExtra(Constants.KEY_ID_FOOD, idFood);
-        startActivity(intent);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(Constants.KEY_COLLECTION_FOOD).document(idFood).delete()
+                .addOnCompleteListener(task -> {
+                   getFoods();
+                });
     }
 
     @Override
     public void onPressEdit(Food food) {
-
-    }
-
-    @Override
-    public void listenCheckbox(Integer totalMoney, ArrayList<Food> foods) {
-        chooseFoods.clear();
-        chooseFoods.addAll(foods);
-        this.totalMoney = totalMoney;
-        binding.btnCart.setText("Giỏ hàng (" + totalMoney + "VND)");
+        Intent i = new Intent(this, ActivityAddFoof.class);
+        i.putExtra("type", type);
+        i.putExtra("food", food);
+        startActivity(i);
     }
 }

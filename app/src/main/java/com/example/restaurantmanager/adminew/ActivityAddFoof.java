@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.restaurantmanager.BaseActivity;
 import com.example.restaurantmanager.R;
 import com.example.restaurantmanager.databinding.ActivityAddFoofBinding;
+import com.example.restaurantmanager.datafake.Food;
+import com.example.restaurantmanager.ultils.BitmapUltil;
 import com.example.restaurantmanager.ultils.Constants;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,12 +32,22 @@ public class ActivityAddFoof extends BaseActivity {
     private Integer type;
     private String encodeImage;
     private String typeFood;
-
+    private Food food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_foof);
+
+        food = (Food) getIntent().getSerializableExtra("food");
+        if (food != null) {
+            Bitmap bitmap = BitmapUltil.getBitmap(food.getImg());
+            if (bitmap != null) {
+                binding.imgChooseImage.setImageBitmap(bitmap);
+            }
+            binding.edtName.setText(food.getName());
+            binding.edtPrice.setText(food.getPrice()+"");
+        }
 
         if (getIntent() != null) {
             type = getIntent().getIntExtra("type", 0);
@@ -59,8 +71,31 @@ public class ActivityAddFoof extends BaseActivity {
         });
 
         binding.btnUpdate.setOnClickListener(view -> {
-            addFood();
+            if (food == null) {
+                addFood();
+            } else {
+                updateFood();
+            }
         });
+    }
+
+    private void updateFood () {
+        showProgressDialog(true);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        HashMap<String, Object> foods = new HashMap<>();
+        foods.put(Constants.KEY_NAME, binding.edtName.getText().toString());
+        foods.put(Constants.KEY_PRICE, binding.edtPrice.getText().toString());
+        if (encodeImage != null)
+            foods.put(Constants.KEY_IMAGE, encodeImage);
+        foods.put(Constants.TYPE_FOOD, typeFood);
+        db.collection(Constants.KEY_COLLECTION_FOOD)
+                .document(food.getId())
+                .update(foods)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Cập nhập thành công", Toast.LENGTH_SHORT).show();
+                    showProgressDialog(false);
+                    finish();
+                });
     }
 
     private void addFood () {

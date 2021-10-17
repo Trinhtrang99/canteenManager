@@ -74,6 +74,9 @@ public class AdapterFood extends RecyclerView.Adapter<AdapterFood.ViewHolder> {
                 holder.checkBox.setChecked(true);
                 return true;
             });
+            holder.rl.setOnClickListener(v -> {
+                onLongPress.onPressEdit(list.get(position));
+            });
         } else {
             holder.checkBox.setVisibility(View.VISIBLE);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {

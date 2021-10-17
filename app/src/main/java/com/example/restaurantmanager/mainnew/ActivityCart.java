@@ -55,8 +55,10 @@ public class ActivityCart extends BaseActivity implements AdapterFood.OnLongPres
     }
 
     private Integer count = 0;
+    private Long totalMoney = 0L;
     private void addOrder () {
         count = 0;
+        totalMoney = 0L;
         showProgressDialog(true);
         for (Food food : foods) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -68,14 +70,22 @@ public class ActivityCart extends BaseActivity implements AdapterFood.OnLongPres
             foods.put(Constants.KEY_TOTAL_MONEY, getIntent().getIntExtra(Constants.KEY_TOTAL_MONEY, 0));
             foods.put(Constants.KEY_DAY, new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
             foods.put(Constants.KEY_TIME, new SimpleDateFormat("HH:mm").format(new Date()));
+            totalMoney += food.getPrice();
             db.collection(Constants.KEY_COLLECTION_ORDER)
                     .add(foods)
                     .addOnSuccessListener(documentReference -> {
                         count++;
                         if (count == this.foods.size()) {
-                            Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            showProgressDialog(false);
-                            onBackPressed();
+                            db.collection(Constants.KEY_COLLECTION_ACCOUNT)
+                                    .document(preferenceManager.getString(Constants.KEY_ID_USER))
+                                    .update(Constants.KEY_SURPLUS, (Long.parseLong(preferenceManager.getString(Constants.KEY_SURPLUS))
+                                            - totalMoney)+"").addOnCompleteListener(task -> {
+
+                                Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                showProgressDialog(false);
+                                onBackPressed();
+
+                            });
                         }
                     });
         }

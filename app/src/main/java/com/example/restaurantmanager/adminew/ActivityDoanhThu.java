@@ -40,6 +40,8 @@ public class ActivityDoanhThu extends BaseActivity {
     private Long totalRevenue = 0L;
     private Long spendingMoney = 0L;
     private void getOrders () {
+        totalRevenue = 0L;
+        spendingMoney = 0L;
         showProgressDialog(true);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(Constants.KEY_COLLECTION_ORDER)
@@ -73,13 +75,10 @@ public class ActivityDoanhThu extends BaseActivity {
                             .get()
                             .addOnCompleteListener(task1 -> {
                                 for (QueryDocumentSnapshot queryDocumentSnapshot : task1.getResult()) {
-                                    if (queryDocumentSnapshot.getString(Constants.KEY_DAY).compareTo(binding.edtDayStart.getText().toString()) >= 0
-                                            && queryDocumentSnapshot.getString(Constants.KEY_DAY).compareTo(binding.edtDayEnd.getText().toString()) <= 0) {
 
-                                        spendingMoney += Long.parseLong(queryDocumentSnapshot.getString(Constants.KEY_PRICE));
+                                    spendingMoney += Long.parseLong(queryDocumentSnapshot.getString(Constants.KEY_TOTAL_MONEY));
 
-                                        binding.txtSpendingMoney.setText("Tiền chi: " + spendingMoney);
-                                    }
+                                    binding.txtSpendingMoney.setText("Tiền chi: " + spendingMoney);
                                 }
 
                                 showProgressDialog(false);

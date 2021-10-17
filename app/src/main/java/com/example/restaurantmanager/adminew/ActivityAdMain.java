@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.restaurantmanager.R;
+import com.example.restaurantmanager.acc.LoginActivity;
 import com.example.restaurantmanager.databinding.ActivityAdMainBinding;
 import com.example.restaurantmanager.databinding.ActivityDoanhThuBindingImpl;
 import com.example.restaurantmanager.mainnew.ActivityThamKhoa;
+import com.example.restaurantmanager.ultils.PreferenceManager;
 
 public class ActivityAdMain extends AppCompatActivity {
     ActivityAdMainBinding binding;
@@ -19,17 +21,17 @@ public class ActivityAdMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ad_main);
         binding.btn1.setOnClickListener(v -> {
-            Intent i = new Intent(this, ActivityAddFoof.class);
+            Intent i = new Intent(this, FoodActivity.class);
             i.putExtra("type", 1);
             startActivity(i);
         });
         binding.btn2.setOnClickListener(v -> {
-            Intent i = new Intent(this, ActivityAddFoof.class);
+            Intent i = new Intent(this, FoodActivity.class);
             i.putExtra("type", 2);
             startActivity(i);
         });
         binding.btn3.setOnClickListener(v -> {
-            Intent i = new Intent(this, ActivityAddFoof.class);
+            Intent i = new Intent(this, FoodActivity.class);
             i.putExtra("type", 3);
             startActivity(i);
         });
@@ -61,8 +63,10 @@ public class ActivityAdMain extends AppCompatActivity {
             startActivity(i);
         });
         binding.btnlogout.setOnClickListener(v -> {
-//            Intent i = new Intent(this, LoginActivity.class);
-//            startActivity(i);
+            PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+            preferenceManager.clear();
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
         });
 
     }

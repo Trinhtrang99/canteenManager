@@ -35,6 +35,41 @@ public class ActivityQLkho extends BaseActivity {
         khoMOdels = new ArrayList<>();
 
         getStore();
+
+        binding.search.setOnClickListener(view -> {
+            if (!binding.edtSearch.getText().toString().isEmpty()) {
+                searchStore();
+            }
+        });
+    }
+
+    private void searchStore () {
+        showProgressDialog(true);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(Constants.KEY_COLLECTION_FOOD_MANAGER)
+                .get()
+                .addOnCompleteListener(task -> {
+                    khoMOdels.clear();
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                        if (queryDocumentSnapshot.getString(Constants.KEY_UNIT).equals(Constants.TYPE_BOTTLE)
+                                || queryDocumentSnapshot.getString(Constants.KEY_UNIT).equals(Constants.TYPE_FEMALE)) {
+
+                            if (queryDocumentSnapshot.getString(Constants.KEY_NAME).contains(binding.edtSearch.getText().toString())) {
+                                KhoMOdel khoMOdel = new KhoMOdel(
+                                        queryDocumentSnapshot.getString(Constants.KEY_NAME),
+                                        queryDocumentSnapshot.getString(Constants.KEY_QUANTITY)
+                                );
+
+                                khoMOdels.add(khoMOdel);
+                            }
+                        }
+                    }
+
+                    adapterQLKho = new AdapterQLKho(khoMOdels);
+                    binding.rvStore.setAdapter(adapterQLKho);
+
+                    showProgressDialog(false);
+                });
     }
 
     private void getStore () {

@@ -49,7 +49,7 @@ public class ActivityQLuser extends BaseActivity {
                             continue;
                         }
 
-                        if (queryDocumentSnapshot.getString(Constants.KEY_NAME).contains(binding.edtSearch.getText().toString())) {
+                        if (queryDocumentSnapshot.getString(Constants.KEY_PHONE_NUMBER).contains(binding.edtSearch.getText().toString())) {
                             UserModel userModel = new UserModel(
                                     queryDocumentSnapshot.getString(Constants.KEY_NAME),
                                     queryDocumentSnapshot.getString(Constants.KEY_SURPLUS)

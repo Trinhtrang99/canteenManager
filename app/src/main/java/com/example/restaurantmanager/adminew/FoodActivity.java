@@ -51,6 +51,12 @@ public class FoodActivity extends BaseActivity implements AdapterFood.OnLongPres
                 typeFood = Constants.OFFICIALS;
             }
         }
+
+        binding.llFood.setOnClickListener(view -> {
+            Intent intent = new Intent(FoodActivity.this, ActivityAddFoof.class);
+            intent.putExtra("type", type);
+            startActivity(intent);
+        });
     }
 
     @Override
